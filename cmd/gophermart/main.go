@@ -36,6 +36,7 @@ func main() {
 	server := api.NewServer(ctx, router, logger, cfg)
 	if err := server.Start(); err != nil {
 		logger.Fatal("failed to start server", zap.Error(err))
+		return
 	}
 
 	<-ctx.Done()
