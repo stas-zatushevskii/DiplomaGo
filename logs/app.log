@@ -1,0 +1,80 @@
+{"level":"error","timestamp":"2025-08-20 14:26:17","msg":"failed to read config file","error":"open config/cfg.yaml: no such file or directory"}
+{"level":"info","timestamp":"2025-08-20 14:26:17","msg":"load config","config":{"Logger":{"SQLLogPath":"","GeneralLogPath":"","ErrorLogPath":""},"App":{"DegugStatus":false}}}
+{"level":"error","timestamp":"2025-08-20 14:27:30","msg":"failed to read config file","error":"open ../../config/cfg.yaml: no such file or directory"}
+{"level":"info","timestamp":"2025-08-20 14:27:30","msg":"load config","config":{"Logger":{"SQLLogPath":"","GeneralLogPath":"","ErrorLogPath":""},"App":{"DegugStatus":false}}}
+{"level":"info","timestamp":"2025-08-20 14:27:55","msg":"load config","config":{"Logger":{"SQLLogPath":"logs/sql/sql.log","GeneralLogPath":"logs/general/app.log","ErrorLogPath":"logs/error/error.log"},"App":{"DegugStatus":false}}}
+{"level":"info","timestamp":"2025-08-20 14:35:43","msg":"load config","config":{"Logger":{"SQLLogPath":"logs/sql/sql.log","GeneralLogPath":"logs/general/app.log","ErrorLogPath":"logs/error/error.log"},"App":{"DegugStatus":false}}}
+{"level":"info","timestamp":"2025-08-20 14:36:18","msg":"load config","config":{"Logger":{"SQLLogPath":"logs/sql/sql.log","GeneralLogPath":"logs/general/app.log","ErrorLogPath":"logs/error/error.log"},"App":{"DegugStatus":false}}}
+{"level":"fatal","timestamp":"2025-08-20 14:36:18","msg":"failed to load config","error":"failed to load config"}
+{"level":"info","timestamp":"2025-08-20 14:36:42","msg":"load config","config":{"Logger":{"SQLLogPath":"logs/sql/sql.log","GeneralLogPath":"logs/general/app.log","ErrorLogPath":"logs/error/error.log"},"App":{"DegugStatus":false}}}
+{"level":"info","timestamp":"2025-08-20 14:36:42","msg":"HALSDJALSKDJSAKLDJLADJKS"}
+{"level":"info","timestamp":"2025-08-20 14:38:32","msg":"load config","Parsed debug status: ":false}
+{"level":"info","timestamp":"2025-08-20 14:40:24","msg":"Parsed config: false"}
+{"level":"info","timestamp":"2025-08-20 15:22:50","msg":"Running server","address":"0.0.0.0:8080"}
+{"level":"info","timestamp":"2025-08-20 15:26:57","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-20 15:27:01","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-20 15:28:42","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-20 15:28:44","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-20 15:30:55","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-20 15:32:37","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-20 15:32:44","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-20 15:33:55","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-20 15:33:56","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-20 15:41:30","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-20 15:42:19","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-20 17:11:47","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-20 17:11:54","msg":"Handled HTTP request","uri":"/","method":"GET","status":200,"duration":0.0000575,"size":13}
+{"level":"info","timestamp":"2025-08-20 17:14:24","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-20 17:14:26","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-20 17:14:27","msg":"Got http request","uri":"/","method":"GET","status":200,"duration":0.000025459,"size":13}
+{"level":"info","timestamp":"2025-08-20 17:15:13","msg":"Got http request","uri":"/","method":"GET","status":200,"duration":0.000028917,"size":13}
+{"level":"info","timestamp":"2025-08-20 17:16:44","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-20 17:17:14","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-20 17:17:16","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-20 17:20:02","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-20 17:20:08","msg":"Handled HTTP request","uri":"/","method":"GET","status":200,"duration":5.000541083,"size":13}
+{"level":"info","timestamp":"2025-08-20 17:20:12","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-20 17:20:16","msg":"Handled HTTP request","uri":"/","method":"GET","status":200,"duration":5.001235708,"size":13}
+{"level":"fatal","timestamp":"2025-08-21 14:14:14","msg":"failed to create database","error":"sql: unknown driver \"pgx\" (forgotten import?)"}
+{"level":"fatal","timestamp":"2025-08-21 14:15:08","msg":"failed to create database","error":"cannot parse `postgres://postgres:xxxxx@localhost:5432/postgres?sslmode=disabl`: failed to configure TLS (sslmode is invalid)"}
+{"level":"fatal","timestamp":"2025-08-21 14:15:37","msg":"failed to create database","error":"cannot parse `postgres://postgres:xxxxx@localhost:5432/postgres?sslmode=disabled`: failed to configure TLS (sslmode is invalid)"}
+{"level":"info","timestamp":"2025-08-21 14:15:48","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-21 14:16:00","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 14:20:17","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-21 14:23:39","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 14:23:41","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-21 14:23:43","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 14:24:07","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-21 14:24:12","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 14:42:28","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-21 14:42:28","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 14:42:43","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-21 14:42:50","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 14:42:52","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-21 14:42:58","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 14:57:18","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-21 14:57:21","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 14:57:21","msg":"shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 14:57:21","msg":"shutdown: done"}
+{"level":"info","timestamp":"2025-08-21 14:58:20","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-21 14:58:23","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 14:58:28","msg":"shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 14:58:28","msg":"shutdown: done"}
+{"level":"info","timestamp":"2025-08-21 15:18:27","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-21 15:18:32","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 15:18:36","msg":"shutdown: done"}
+{"level":"info","timestamp":"2025-08-21 15:38:33","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-21 15:38:40","msg":"Handled HTTP request","uri":"/","method":"GET","status":200,"duration":5.002711209,"size":13}
+{"level":"info","timestamp":"2025-08-21 15:38:47","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 15:38:50","msg":"Handled HTTP request","uri":"/","method":"GET","status":200,"duration":5.002342125,"size":13}
+{"level":"info","timestamp":"2025-08-21 15:38:50","msg":"shutdown: done"}
+{"level":"info","timestamp":"2025-08-21 15:42:08","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"warn","timestamp":"2025-08-21 15:42:11","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 15:42:15","msg":"Handled HTTP request","uri":"/","method":"GET","status":200,"duration":5.001361958,"size":13}
+{"level":"warn","timestamp":"2025-08-21 15:42:16","msg":"Closing database"}
+{"level":"info","timestamp":"2025-08-21 15:42:16","msg":"shutdown: done"}
+{"level":"info","timestamp":"2025-08-21 15:43:21","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"warn","timestamp":"2025-08-21 15:43:26","msg":"Shutting down server..."}
+{"level":"info","timestamp":"2025-08-21 15:43:32","msg":"Handled HTTP request","uri":"/","method":"GET","status":200,"duration":10.002116917,"size":13}
+{"level":"warn","timestamp":"2025-08-21 15:43:32","msg":"Closing database"}
+{"level":"info","timestamp":"2025-08-21 15:43:32","msg":"shutdown: done"}

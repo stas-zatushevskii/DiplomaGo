@@ -1,0 +1,30 @@
+# config.yml
+
+app:
+  debug_status: true
+
+server:
+  host: "127.0.0.1"
+  port: 8080
+  read_timeout: 15s
+  write_timeout: 15s
+  idle_timeout: 60s
+
+database:
+  driver: "postgres"
+  host: "localhost"
+  port: 5432
+  user: "appuser"
+  password: "secret"
+  dbname: "appdb"
+  sslmode: "disable"
+  max_connections: 20
+  max_idle_connections: 5
+  conn_path: "postgres://postgres:123@localhost:5432/postgres"  ## FIXME: only for test
+
+security:
+  jwt_secret: "supersecretkey"
+  token_expiry: 24h
+  allowed_origins:
+    - "https://app.example.com"
+    - "https://admin.example.com"
