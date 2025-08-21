@@ -26,7 +26,7 @@ func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer stop()
 
-	db, err := database.NewDatabase(logger, cfg, &reqWaitGroup) // TODO graceful shut  down for server and base
+	db, err := database.NewDatabase(logger, cfg, &reqWaitGroup)
 	if err != nil {
 		logger.Fatal("failed to create database", zap.Error(err))
 		return
@@ -47,3 +47,15 @@ func main() {
 
 	logger.Info("shutdown: done")
 }
+
+/*
+ShutDown logic:
+	listen for ctx.Done(), if got signal: creates new chan "done",
+	run goroutine db.Close(done).
+
+	goroutine db.Close(done):
+		waiting wg.Done(), closing database, closing chan "done"
+		(wg.Done() will happened when all active requests finish their job)
+
+	when chan "done" is closed - exiting from main function
+*/
