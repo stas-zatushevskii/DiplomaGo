@@ -3,14 +3,8 @@
 app:
   debug_status: true
 
-logger:
-  error_log_path: "logs/error/error.log"
-  sql_log_path: "logs/sql/sql.log"
-  general_log_path: "logs/general/app.log"
-
-
 server:
-  host: "0.0.0.0"
+  host: "127.0.0.1"
   port: 8080
   read_timeout: 15s
   write_timeout: 15s
@@ -26,6 +20,7 @@ database:
   sslmode: "disable"
   max_connections: 20
   max_idle_connections: 5
+  conn_path: "postgres://postgres:123@localhost:5432/postgres"  ## FIXME: only for test
 
 security:
   jwt_secret: "supersecretkey"
