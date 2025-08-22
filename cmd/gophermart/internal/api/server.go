@@ -3,66 +3,61 @@ package api
 import (
 	"context"
 	"errors"
+	"fmt"
 	"github.com/go-chi/chi/v5"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/config"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/logger"
 	"go.uber.org/zap"
 	"net/http"
 	"strconv"
+	"sync"
 	"time"
 )
 
 type Server struct {
-	config        *config.Config
-	logger        *zap.Logger
-	router        *chi.Mux
-	ServerCtx     context.Context
-	ServerStopCtx context.CancelFunc
-	Srv           *http.Server
+	config *config.Config
+	logger *zap.Logger
+	router *chi.Mux
+	ctx    context.Context
+	reqWg  *sync.WaitGroup
+	Srv    *http.Server
 }
 
-func NewServer(router *chi.Mux, logger *zap.Logger, config *config.Config) *Server {
-	serverCtx, serverStopCtx := context.WithCancel(context.Background())
+func NewServer(ctx context.Context, router *chi.Mux, logger *zap.Logger, config *config.Config, wg *sync.WaitGroup) *Server {
 	return &Server{
-		logger:        logger,
-		ServerStopCtx: serverStopCtx,
-		ServerCtx:     serverCtx,
-		router:        router,
-		config:        config,
+		logger: logger,
+		ctx:    ctx,
+		router: router,
+		config: config,
+		reqWg:  wg,
 	}
 }
 
-func (s *Server) Start() error {
-	s.logger.Info("Running server", zap.String("address", s.config.Server.Host+":"+strconv.Itoa(s.config.Server.Port)))
+func (s *Server) Start() {
+	s.logger.Info("Starting server: ", zap.String("address", s.config.Server.Host+":"+strconv.Itoa(s.config.Server.Port)))
 	srv := &http.Server{
 		Addr:    s.config.Server.Host + ":" + strconv.Itoa(s.config.Server.Port),
 		Handler: logger.WithLogging(s.router, s.logger),
 	}
-	errCh := make(chan error, 1)
+	s.Srv = srv
 	go func() {
-		errCh <- srv.ListenAndServe()
+		err := srv.ListenAndServe()
+		if err != nil && !errors.Is(err, http.ErrServerClosed) {
+			s.logger.Error("Failed to start server", zap.Error(err))
+			return
+		}
 	}()
-	select {
-	case err := <-errCh:
-		return err
-	}
+	s.logger.Info("Server started")
 }
 
 func (s *Server) ServerShutdown() {
-	s.logger.Info("Shutting down server...")
-	shutdownCtx, _ := context.WithTimeout(s.ServerCtx, 30*time.Second)
+	shutdownCtx, cancel := context.WithTimeout(s.ctx, 30*time.Second)
+	defer cancel()
 
-	go func() {
-		<-shutdownCtx.Done()
-		if errors.Is(shutdownCtx.Err(), context.DeadlineExceeded) {
-			s.logger.Fatal("graceful shutdown timed out.. forcing exit.")
-		}
-	}()
-
-	// Trigger graceful shutdown
-	err := s.Srv.Shutdown(shutdownCtx)
-	if err != nil {
-		s.logger.Error("error shutting down server", zap.Error(err))
+	if err := s.Srv.Shutdown(shutdownCtx); err != nil && !errors.Is(err, http.ErrServerClosed) {
+		s.logger.Error("error shutting down server", zap.Error(fmt.Errorf("server still processing old requests")))
 	}
-	s.ServerStopCtx()
+
+	s.reqWg.Wait()
+
 }
