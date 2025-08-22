@@ -78,3 +78,8 @@
 {"level":"info","timestamp":"2025-08-21 15:43:32","msg":"Handled HTTP request","uri":"/","method":"GET","status":200,"duration":10.002116917,"size":13}
 {"level":"warn","timestamp":"2025-08-21 15:43:32","msg":"Closing database"}
 {"level":"info","timestamp":"2025-08-21 15:43:32","msg":"shutdown: done"}
+{"level":"info","timestamp":"2025-08-22 11:08:21","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-08-22 11:08:30","msg":"Handled HTTP request","uri":"/","method":"GET","status":200,"duration":5.002341584,"size":13}
+{"level":"info","timestamp":"2025-08-22 11:13:34","msg":"Running server","address":"127.0.0.1:8080"}
+{"level":"fatal","timestamp":"2025-08-22 11:13:34","msg":"failed to start server","error":"listen tcp 127.0.0.1:8080: bind: address already in use"}
+{"level":"info","timestamp":"2025-08-22 11:14:11","msg":"Running server","address":"127.0.0.1:8081"}

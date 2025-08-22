@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"errors"
 	"github.com/go-chi/chi/v5"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/config"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/logger"
@@ -12,18 +13,22 @@ import (
 )
 
 type Server struct {
-	config *config.Config
-	logger *zap.Logger
-	router *chi.Mux
-	ctx    context.Context
+	config        *config.Config
+	logger        *zap.Logger
+	router        *chi.Mux
+	ServerCtx     context.Context
+	ServerStopCtx context.CancelFunc
+	Srv           *http.Server
 }
 
-func NewServer(ctx context.Context, router *chi.Mux, logger *zap.Logger, config *config.Config) *Server {
+func NewServer(router *chi.Mux, logger *zap.Logger, config *config.Config) *Server {
+	serverCtx, serverStopCtx := context.WithCancel(context.Background())
 	return &Server{
-		logger: logger,
-		ctx:    ctx,
-		router: router,
-		config: config,
+		logger:        logger,
+		ServerStopCtx: serverStopCtx,
+		ServerCtx:     serverCtx,
+		router:        router,
+		config:        config,
 	}
 }
 
@@ -38,12 +43,26 @@ func (s *Server) Start() error {
 		errCh <- srv.ListenAndServe()
 	}()
 	select {
-	case <-s.ctx.Done():
-		s.logger.Warn("Shutting down server...")
-		httpCtx, httpCancel := context.WithTimeout(context.Background(), 30*time.Second) // 30 sec for close all active requests
-		defer httpCancel()
-		return srv.Shutdown(httpCtx)
 	case err := <-errCh:
 		return err
 	}
+}
+
+func (s *Server) ServerShutdown() {
+	s.logger.Info("Shutting down server...")
+	shutdownCtx, _ := context.WithTimeout(s.ServerCtx, 30*time.Second)
+
+	go func() {
+		<-shutdownCtx.Done()
+		if errors.Is(shutdownCtx.Err(), context.DeadlineExceeded) {
+			s.logger.Fatal("graceful shutdown timed out.. forcing exit.")
+		}
+	}()
+
+	// Trigger graceful shutdown
+	err := s.Srv.Shutdown(shutdownCtx)
+	if err != nil {
+		s.logger.Error("error shutting down server", zap.Error(err))
+	}
+	s.ServerStopCtx()
 }

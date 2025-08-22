@@ -13,6 +13,9 @@ import (
 )
 
 func main() {
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
+	defer stop()
+
 	logger := log.CreateLogger()
 
 	cfg, err := config.LoadConfig(logger)
@@ -21,32 +24,23 @@ func main() {
 		return
 	}
 
-	var reqWaitGroup sync.WaitGroup
+	var reqWaitGroup sync.WaitGroup // FIXME
 
-	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
-	defer stop()
-
-	db, err := database.NewDatabase(logger, cfg, &reqWaitGroup)
+	db, err := database.NewDatabase(logger, cfg, &reqWaitGroup) // FIXME
 	if err != nil {
 		logger.Fatal("failed to create database", zap.Error(err))
 		return
 	}
 	// TODO: add service
-	router := api.NewRouter(logger, db.Db, &reqWaitGroup)
-	server := api.NewServer(ctx, router, logger, cfg)
+	router := api.NewRouter(logger, db.Db, &reqWaitGroup) // FIXME
+	server := api.NewServer(router, logger, cfg)
 	if err := server.Start(); err != nil {
 		logger.Fatal("failed to start server", zap.Error(err))
 		return
 	}
-
+	logger.Info("Server started")
 	<-ctx.Done()
-
-	done := make(chan struct{})
-	go db.Close(done)
-
-	<-done
-
-	logger.Info("shutdown: done")
+	GracefulShutdown(logger, server, db)
 }
 
 /*
@@ -60,3 +54,12 @@ ShutDown logic:
 
 	when chan "done" is closed - exiting from main function
 */
+
+func GracefulShutdown(logger *zap.Logger, server *api.Server, database *database.Database) {
+	logger.Warn("shutdown: start")
+	server.ServerShutdown()
+	logger.Info("shutdown: server closed")
+	database.DatabaseShutdown()
+	logger.Info("shutdown: database closed")
+	logger.Warn("shutdown: end")
+}

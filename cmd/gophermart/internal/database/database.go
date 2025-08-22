@@ -36,3 +36,10 @@ func (d *Database) Close(done chan struct{}) {
 	}
 	close(done)
 }
+
+func (d *Database) DatabaseShutdown() {
+	err := d.Db.Close()
+	if err != nil {
+		d.logger.Fatal("failed to close database", zap.Error(err))
+	}
+}
