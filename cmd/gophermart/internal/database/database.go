@@ -5,16 +5,14 @@ import (
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/config"
 	"go.uber.org/zap"
-	"sync"
 )
 
 type Database struct {
 	Db     *sql.DB
 	logger *zap.Logger
-	wg     *sync.WaitGroup
 }
 
-func NewDatabase(logger *zap.Logger, config *config.Config, wg *sync.WaitGroup) (*Database, error) {
+func NewDatabase(logger *zap.Logger, config *config.Config) (*Database, error) {
 	db, err := sql.Open("pgx", config.Database.ConnPath)
 	if err != nil {
 		return nil, err
@@ -23,16 +21,12 @@ func NewDatabase(logger *zap.Logger, config *config.Config, wg *sync.WaitGroup) 
 	if err != nil {
 		return nil, err
 	}
-	return &Database{Db: db, logger: logger, wg: wg}, nil
+	return &Database{Db: db, logger: logger}, nil
 }
 
-func (d *Database) Close(done chan struct{}) {
-	d.wg.Wait()
-	d.logger.Warn("Closing database")
-
+func (d *Database) DatabaseShutdown() {
 	err := d.Db.Close()
 	if err != nil {
 		d.logger.Fatal("failed to close database", zap.Error(err))
 	}
-	close(done)
 }

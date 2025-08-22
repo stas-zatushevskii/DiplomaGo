@@ -13,6 +13,9 @@ import (
 )
 
 func main() {
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
+	defer stop()
+
 	logger := log.CreateLogger()
 
 	cfg, err := config.LoadConfig(logger)
@@ -21,41 +24,28 @@ func main() {
 		return
 	}
 
-	var reqWaitGroup sync.WaitGroup
-
-	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
-	defer stop()
-
-	db, err := database.NewDatabase(logger, cfg, &reqWaitGroup)
+	db, err := database.NewDatabase(logger, cfg)
 	if err != nil {
 		logger.Fatal("failed to create database", zap.Error(err))
 		return
 	}
+
 	// TODO: add service
-	router := api.NewRouter(logger, db.Db, &reqWaitGroup)
-	server := api.NewServer(ctx, router, logger, cfg)
-	if err := server.Start(); err != nil {
-		logger.Fatal("failed to start server", zap.Error(err))
-	}
+
+	var reqWg sync.WaitGroup
+	router := api.NewRouter(logger, db.Db, &reqWg)
+	server := api.NewServer(ctx, router, logger, cfg, &reqWg)
+	server.Start()
 
 	<-ctx.Done()
-
-	done := make(chan struct{})
-	go db.Close(done)
-
-	<-done
-
-	logger.Info("shutdown: done")
+	StartGracefulShutdown(logger, server, db)
 }
 
-/*
-ShutDown logic:
-	listen for ctx.Done(), if got signal: creates new chan "done",
-	run goroutine db.Close(done).
-
-	goroutine db.Close(done):
-		waiting wg.Done(), closing database, closing chan "done"
-		(wg.Done() will happened when all active requests finish their job)
-
-	when chan "done" is closed - exiting from main function
-*/
+func StartGracefulShutdown(logger *zap.Logger, server *api.Server, database *database.Database) {
+	logger.Warn("STARTED Graceful Shutdown")
+	server.ServerShutdown()
+	logger.Info("shutdown: server closed")
+	database.DatabaseShutdown()
+	logger.Info("shutdown: database closed")
+	logger.Warn("ENDED Graceful Shutdown")
+}
