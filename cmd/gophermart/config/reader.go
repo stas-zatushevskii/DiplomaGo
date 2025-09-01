@@ -134,5 +134,7 @@ func LoadConfig(log *zap.Logger) (*Config, error) {
 	if err := nc.config.parseFlags(); err != nil {
 		return nil, err
 	}
+	log.Info(nc.config.Database.Dsn)
+	log.Info(nc.config.Database.ConnPath)
 	return nc.config, nil
 }
