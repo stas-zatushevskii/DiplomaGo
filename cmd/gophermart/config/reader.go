@@ -57,10 +57,16 @@ func (cfg *Config) parseFlags() error {
 
 	if serverAddrFlg != "" {
 		cfg.Server.Address = serverAddrFlg
+		fmt.Println("-----------------------------------------------------------")
+		fmt.Println(serverAddrFlg)
+		fmt.Println("-----------------------------------------------------------")
 	}
 
 	if accrualAddrFlg != "" {
 		cfg.Accrual.Address = accrualAddrFlg
+		fmt.Println("-----------------------------------------------------------")
+		fmt.Println(accrualAddrFlg)
+		fmt.Println("-----------------------------------------------------------")
 	}
 
 	if connPathFlag != "" {
@@ -70,6 +76,9 @@ func (cfg *Config) parseFlags() error {
 		}
 		cfg.Database.ConnPath = connPathFlag
 		cfg.Database.Dsn = dsn
+		fmt.Println("-----------------------------------------------------------")
+		fmt.Println(dsn)
+		fmt.Println("-----------------------------------------------------------")
 	} else if cfg.Database.ConnPath != "" && cfg.Database.Dsn == "" {
 		dsn, err := ConvertPostgresURLToDSN(cfg.Database.ConnPath)
 		if err != nil {
