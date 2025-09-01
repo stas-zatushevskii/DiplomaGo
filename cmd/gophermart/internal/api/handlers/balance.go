@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/api/utils"
+	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/constants"
 	CustomErrors "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/errors"
 	"io"
 	"net/http"
@@ -26,7 +27,6 @@ func (h *Handler) GetUserBalance() http.HandlerFunc {
 		}
 		w.WriteHeader(http.StatusOK)
 		w.Write(response)
-		return
 	}
 }
 
@@ -74,14 +74,13 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 			}
 		}
 		w.WriteHeader(http.StatusOK)
-		return
 	}
 }
 
 func (h *Handler) GetWithdrawalsHistory() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const HandlerName = "GetWithdrawalsHistory"
-		userID := r.Context().Value("userID").(uint)
+		userID := r.Context().Value(constants.UserIDKey).(uint)
 		history, err := h.service.OrderService.GetWithdrawByUserID(userID)
 		if err != nil {
 			switch {

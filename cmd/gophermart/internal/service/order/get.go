@@ -6,7 +6,7 @@ import (
 
 func (o *ServiceOrder) GetAllOrders(userID uint) ([]models.Order, error) {
 	var response []models.Order
-	orders, err := o.database.GetOrdersByUserId(userID)
+	orders, err := o.database.GetOrdersByUserID(userID)
 	if err != nil {
 		return response, err
 	}

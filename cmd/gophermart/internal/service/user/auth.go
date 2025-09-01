@@ -24,7 +24,7 @@ func (u *ServiceUser) CreateNew(username, password string) (*models.User, error)
 }
 
 type LoginResponse struct {
-	UserId        uint
+	UserID        uint
 	Authenticated bool
 }
 
@@ -41,7 +41,7 @@ func (u *ServiceUser) Login(username, password string) (*LoginResponse, error) {
 		u.logger.Error("Failed to verify password", zap.Error(err))
 		return &response, err
 	}
-	response.UserId = user.ID
+	response.UserID = user.ID
 	response.Authenticated = ok
 	return &response, nil
 }

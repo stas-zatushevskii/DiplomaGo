@@ -11,14 +11,14 @@ type Claims struct {
 	UserID uint
 }
 
-func (u *ServiceUser) BuildJwt(userId uint) (string, error) {
+func (u *ServiceUser) BuildJwt(userID uint) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, Claims{
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Duration(u.config.JWT.Expire) * time.Hour)),
 			Issuer:    "gophermart",
 		},
 
-		UserID: userId,
+		UserID: userID,
 	})
 
 	tokenString, err := token.SignedString([]byte(u.config.JWT.Secret))
@@ -29,7 +29,7 @@ func (u *ServiceUser) BuildJwt(userId uint) (string, error) {
 	return tokenString, nil
 }
 
-func (u *ServiceUser) GetUserIdFromJwt(tokenString string) (uint, error) {
+func (u *ServiceUser) GetUserIDFromJwt(tokenString string) (uint, error) {
 	claims := &Claims{}
 	token, err := jwt.ParseWithClaims(tokenString, claims,
 		func(t *jwt.Token) (interface{}, error) {

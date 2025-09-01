@@ -11,13 +11,16 @@ import (
 )
 
 type Database struct {
-	Db     *sql.DB
+	DB     *sql.DB
 	GormDB *gorm.DB
 	logger *zap.Logger
 }
 
 func NewDatabase(logger *zap.Logger, config *config.Config) (*Database, error) {
 	db, err := sql.Open("pgx", config.Database.ConnPath)
+	if err != nil {
+		return nil, err
+	}
 	gormDB, err := gorm.Open(postgres.Open(config.Database.Dsn), &gorm.Config{})
 	if err != nil {
 		return nil, err
@@ -26,12 +29,12 @@ func NewDatabase(logger *zap.Logger, config *config.Config) (*Database, error) {
 	if err != nil {
 		return nil, err
 	}
-	database := &Database{Db: db, GormDB: gormDB, logger: logger}
+	database := &Database{DB: db, GormDB: gormDB, logger: logger}
 	return database, nil
 }
 
 func (d *Database) DatabaseShutdown() {
-	err := d.Db.Close()
+	err := d.DB.Close()
 	if err != nil {
 		d.logger.Fatal("failed to close database", zap.Error(err))
 	}

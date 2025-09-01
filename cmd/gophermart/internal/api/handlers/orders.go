@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/api/utils"
+	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/constants"
 	customErrors "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/errors"
 	"io"
 	"net/http"
@@ -22,7 +23,7 @@ func (h *Handler) OrderCreate() http.HandlerFunc {
 		r.Body.Close()
 
 		orderNumber := string(body)
-		userID := r.Context().Value("userID").(uint)
+		userID := r.Context().Value(constants.UserIDKey).(uint)
 		err = h.service.OrderService.AddNewOrder(orderNumber, userID)
 		if err != nil {
 			switch {
@@ -42,14 +43,13 @@ func (h *Handler) OrderCreate() http.HandlerFunc {
 			}
 		}
 		w.WriteHeader(http.StatusAccepted)
-		return
 	}
 }
 
 func (h *Handler) OrdersGet() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const HandlerName = "OrdersGet"
-		userID := r.Context().Value("userID").(uint)
+		userID := r.Context().Value(constants.UserIDKey).(uint)
 
 		orders, err := h.service.OrderService.GetAllOrders(userID)
 		if err != nil {
@@ -64,6 +64,5 @@ func (h *Handler) OrdersGet() http.HandlerFunc {
 		}
 		w.WriteHeader(http.StatusOK)
 		w.Write(response)
-		return
 	}
 }

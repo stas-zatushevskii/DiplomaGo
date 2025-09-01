@@ -67,7 +67,7 @@ func (h *Handler) Register() http.HandlerFunc {
 			http.Error(w, utils.ErrorAsJSON(fmt.Errorf("unauthorized")), http.StatusUnauthorized)
 			return
 		}
-		jwt, err := h.service.UserService.BuildJwt(login.UserId)
+		jwt, err := h.service.UserService.BuildJwt(login.UserID)
 		if err != nil {
 			http.Error(w, utils.ErrorAsJSON(err), http.StatusInternalServerError)
 			return
@@ -122,7 +122,7 @@ func (h *Handler) Login() http.HandlerFunc {
 			http.Error(w, utils.ErrorAsJSON(fmt.Errorf("unauthorized")), http.StatusUnauthorized)
 			return
 		}
-		jwt, err := h.service.UserService.BuildJwt(login.UserId)
+		jwt, err := h.service.UserService.BuildJwt(login.UserID)
 		if err != nil {
 			http.Error(w, utils.ErrorAsJSON(err), http.StatusInternalServerError)
 			return

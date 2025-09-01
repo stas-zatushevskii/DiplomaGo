@@ -6,7 +6,7 @@ import (
 
 func (u *ServiceUser) GetUser(userID uint) (*models.User, error) {
 	var response *models.User
-	user, err := u.database.GetUserById(userID)
+	user, err := u.database.GetUserByID(userID)
 	if err != nil {
 		return response, err
 	}

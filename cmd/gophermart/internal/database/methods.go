@@ -22,7 +22,7 @@ func (d *Database) CreateNewUser(user *models.User) error {
 	return res.Error
 }
 
-func (d *Database) GetUserById(id uint) (*models.User, error) {
+func (d *Database) GetUserByID(id uint) (*models.User, error) {
 	var user models.User
 	res := d.GormDB.Where("id = ?", id).First(&user)
 	if res.Error != nil {
@@ -131,7 +131,7 @@ func (d *Database) GetWithdrawalsHistory(userID uint) ([]models.OrderHistory, er
 	return history, nil
 }
 
-func (d *Database) GetOrdersByUserId(userID uint) ([]models.Order, error) {
+func (d *Database) GetOrdersByUserID(userID uint) ([]models.Order, error) {
 	var orders []models.Order
 	res := d.GormDB.Where("user_id = ?", userID).Find(&orders)
 	if res.Error != nil {
