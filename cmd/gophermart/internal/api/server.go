@@ -9,7 +9,6 @@ import (
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/logger"
 	"go.uber.org/zap"
 	"net/http"
-	"strconv"
 	"sync"
 	"time"
 )
@@ -34,9 +33,9 @@ func NewServer(ctx context.Context, router *chi.Mux, logger *zap.Logger, config 
 }
 
 func (s *Server) Start() {
-	s.logger.Info("Starting server: ", zap.String("address", s.config.Server.Host+":"+strconv.Itoa(s.config.Server.Port)))
+	s.logger.Info("Starting server: ", zap.String("address", s.config.Server.Address))
 	srv := &http.Server{
-		Addr:    s.config.Server.Host + ":" + strconv.Itoa(s.config.Server.Port),
+		Addr:    s.config.Server.Address,
 		Handler: logger.WithLogging(s.router, s.logger),
 	}
 	s.Srv = srv

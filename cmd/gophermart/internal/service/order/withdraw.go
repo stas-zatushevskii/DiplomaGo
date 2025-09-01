@@ -1,0 +1,39 @@
+package order
+
+import (
+	"fmt"
+	customErrors "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/errors"
+	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/models"
+	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/utils"
+)
+
+func (o *ServiceOrder) Withdraw(withdrawn float64, orderNumber string) error {
+	order, err := o.database.GetOrderByOrderNumber(orderNumber)
+	if err != nil {
+		return fmt.Errorf("failed to get order by order number: %v", err)
+	}
+	formatedWithdrawn := utils.NewMoneyFromFloat(withdrawn)
+	if order.Accrual <= formatedWithdrawn {
+		return customErrors.ErrNotEnoughBalance
+	}
+	err = o.database.DecreaseOrderAccrual(orderNumber, formatedWithdrawn)
+	if err != nil {
+		return fmt.Errorf("error when decreasing order accrual: %v", err)
+	}
+	err = o.database.AddToOrderHistory(order, formatedWithdrawn)
+	if err != nil {
+		return fmt.Errorf("failed to add to order history: %v", err)
+	}
+	return nil
+}
+
+func (o *ServiceOrder) GetWithdrawByUserID(userID uint) ([]models.OrderHistory, error) {
+	history, err := o.database.GetWithdrawalsHistory(userID)
+	if err != nil {
+		return nil, err
+	}
+	if len(history) == 0 {
+		return nil, customErrors.ErrNoWithdrawals
+	}
+	return history, nil
+}
