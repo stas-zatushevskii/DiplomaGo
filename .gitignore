@@ -23,4 +23,4 @@ vendor/
 .vscode
 
 ./logs/
-./config/cfg.yml
+./config/config.yml

@@ -1,6 +1,6 @@
-{"level":"error","timestamp":"2025-08-20 14:26:17","msg":"failed to read config file","error":"open config/cfg.yaml: no such file or directory"}
+{"level":"error","timestamp":"2025-08-20 14:26:17","msg":"failed to read config file","error":"open config/config.yaml: no such file or directory"}
 {"level":"info","timestamp":"2025-08-20 14:26:17","msg":"load config","config":{"Logger":{"SQLLogPath":"","GeneralLogPath":"","ErrorLogPath":""},"App":{"DegugStatus":false}}}
-{"level":"error","timestamp":"2025-08-20 14:27:30","msg":"failed to read config file","error":"open ../../config/cfg.yaml: no such file or directory"}
+{"level":"error","timestamp":"2025-08-20 14:27:30","msg":"failed to read config file","error":"open ../../config/config.yaml: no such file or directory"}
 {"level":"info","timestamp":"2025-08-20 14:27:30","msg":"load config","config":{"Logger":{"SQLLogPath":"","GeneralLogPath":"","ErrorLogPath":""},"App":{"DegugStatus":false}}}
 {"level":"info","timestamp":"2025-08-20 14:27:55","msg":"load config","config":{"Logger":{"SQLLogPath":"logs/sql/sql.log","GeneralLogPath":"logs/general/app.log","ErrorLogPath":"logs/error/error.log"},"App":{"DegugStatus":false}}}
 {"level":"info","timestamp":"2025-08-20 14:35:43","msg":"load config","config":{"Logger":{"SQLLogPath":"logs/sql/sql.log","GeneralLogPath":"logs/general/app.log","ErrorLogPath":"logs/error/error.log"},"App":{"DegugStatus":false}}}
@@ -83,3 +83,378 @@
 {"level":"info","timestamp":"2025-08-22 11:13:34","msg":"Running server","address":"127.0.0.1:8080"}
 {"level":"fatal","timestamp":"2025-08-22 11:13:34","msg":"failed to start server","error":"listen tcp 127.0.0.1:8080: bind: address already in use"}
 {"level":"info","timestamp":"2025-08-22 11:14:11","msg":"Running server","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-23 19:53:22","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-23 19:53:22","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-23 19:53:37","msg":"Handled HTTP request","uri":"/","method":"GET","status":200,"duration":5.004426375,"size":13}
+{"level":"info","timestamp":"2025-08-25 16:43:02","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-25 16:43:02","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-25 16:43:11","msg":"Handled HTTP request","uri":"/password","method":"GET","status":400,"duration":0.000130208,"size":13}
+{"level":"info","timestamp":"2025-08-25 16:44:32","msg":"Handled HTTP request","uri":"/password","method":"GET","status":400,"duration":0.0002825,"size":13}
+{"level":"info","timestamp":"2025-08-25 16:44:54","msg":"Handled HTTP request","uri":"/password","method":"GET","status":400,"duration":0.000135542,"size":13}
+{"level":"warn","timestamp":"2025-08-25 16:46:27","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-25 16:46:27","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-25 16:46:27","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-25 16:46:27","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-25 16:46:48","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-25 16:46:48","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-25 16:46:52","msg":"Handled HTTP request","uri":"/password","method":"GET","status":200,"duration":0.158191208,"size":97}
+{"level":"info","timestamp":"2025-08-25 16:47:35","msg":"Handled HTTP request","uri":"/verify","method":"GET","status":404,"duration":0.161604583,"size":17}
+{"level":"info","timestamp":"2025-08-25 16:47:58","msg":"Handled HTTP request","uri":"/verify","method":"GET","status":200,"duration":0.161313667,"size":0}
+{"level":"warn","timestamp":"2025-08-25 17:19:40","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-25 17:19:40","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-25 17:19:40","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-25 17:19:40","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-27 21:08:52","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-27 21:08:52","msg":"Server started"}
+{"level":"warn","timestamp":"2025-08-27 21:11:04","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-27 21:11:04","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-27 21:11:04","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-27 21:11:04","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-27 21:11:05","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-27 21:11:05","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-28 00:11:43","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 00:11:43","msg":"Server started"}
+{"level":"warn","timestamp":"2025-08-28 00:12:10","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:12:10","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 00:12:10","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 00:12:10","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:12:12","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 00:12:12","msg":"Server started"}
+{"level":"warn","timestamp":"2025-08-28 00:14:06","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:14:06","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 00:14:06","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 00:14:06","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:14:08","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 00:14:08","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 00:14:13","msg":"Failed to verify password","error":"the encoded hash is not in the correct format"}
+{"level":"error","timestamp":"2025-08-28 00:14:13","msg":"Login: the encoded hash is not in the correct format"}
+{"level":"info","timestamp":"2025-08-28 00:14:13","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":500,"duration":0.343650917,"size":58}
+{"level":"warn","timestamp":"2025-08-28 00:17:42","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:17:42","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 00:17:42","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 00:17:42","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:17:45","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 00:17:45","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 00:17:48","msg":"Failed to create new user","error":"ERROR: duplicate key value violates unique constraint \"uni_users_username\" (SQLSTATE 23505)"}
+{"level":"warn","timestamp":"2025-08-28 00:23:43","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:23:43","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 00:23:43","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 00:23:43","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:23:46","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 00:23:46","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 00:23:48","msg":"Failed to create new user","error":"ERROR: duplicate key value violates unique constraint \"uni_users_username\" (SQLSTATE 23505)"}
+{"level":"warn","timestamp":"2025-08-28 00:28:23","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:28:23","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 00:28:23","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 00:28:23","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:28:26","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 00:28:26","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 00:28:29","msg":"Failed to create new user","error":"ERROR: duplicate key value violates unique constraint \"uni_users_username\" (SQLSTATE 23505)"}
+{"level":"warn","timestamp":"2025-08-28 00:34:42","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:34:42","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 00:34:42","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 00:34:42","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:34:44","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 00:34:44","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 00:34:47","msg":"Failed to create new user","error":"ERROR: duplicate key value violates unique constraint \"uni_users_username\" (SQLSTATE 23505)"}
+{"level":"warn","timestamp":"2025-08-28 00:36:43","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:36:43","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 00:36:43","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 00:36:43","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:36:45","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 00:36:45","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 00:36:48","msg":"Failed to create new user","error":"ERROR: duplicate key value violates unique constraint \"uni_users_username\" (SQLSTATE 23505)"}
+{"level":"info","timestamp":"2025-08-28 00:36:48","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":500,"duration":0.166919666,"size":106}
+{"level":"warn","timestamp":"2025-08-28 00:46:39","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:46:39","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 00:46:39","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 00:46:39","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:46:41","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 00:46:41","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 00:46:44","msg":"Failed to create new user","error":"ERROR: duplicate key value violates unique constraint \"uni_users_username\" (SQLSTATE 23505)"}
+{"level":"info","timestamp":"2025-08-28 00:46:44","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":500,"duration":0.177888708,"size":106}
+{"level":"warn","timestamp":"2025-08-28 00:49:58","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:49:58","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 00:49:58","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 00:49:58","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:52:03","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 00:52:03","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 00:52:06","msg":"Failed to create new user","error":"user already exists"}
+{"level":"info","timestamp":"2025-08-28 00:52:06","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":409,"duration":0.163650125,"size":32}
+{"level":"error","timestamp":"2025-08-28 00:53:43","msg":"Failed to create new user","error":"user already exists"}
+{"level":"info","timestamp":"2025-08-28 00:53:43","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":409,"duration":0.162609084,"size":32}
+{"level":"warn","timestamp":"2025-08-28 00:59:55","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 00:59:55","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 00:59:55","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 00:59:55","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:00:04","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:00:04","msg":"Server started"}
+{"level":"warn","timestamp":"2025-08-28 01:02:21","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:02:21","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:02:21","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:02:21","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:02:23","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:02:23","msg":"Server started"}
+{"level":"warn","timestamp":"2025-08-28 01:04:21","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:04:21","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:04:21","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:04:21","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:04:23","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:04:23","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 01:04:25","msg":"Failed to create new user","error":"user already exists"}
+{"level":"info","timestamp":"2025-08-28 01:04:25","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":409,"duration":0.167807417,"size":32}
+{"level":"warn","timestamp":"2025-08-28 01:06:18","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:06:18","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:06:18","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:06:18","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:06:21","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:06:21","msg":"Server started"}
+{"level":"warn","timestamp":"2025-08-28 01:08:44","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:08:44","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:08:44","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:08:44","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:08:46","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:08:46","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 01:08:48","msg":"Failed to create new user","error":"user already exists"}
+{"level":"info","timestamp":"2025-08-28 01:08:48","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":409,"duration":0.165719875,"size":32}
+{"level":"warn","timestamp":"2025-08-28 01:09:04","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:09:04","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:09:04","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:09:04","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:09:06","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:09:06","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-28 01:09:09","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":200,"duration":0.306229458,"size":0}
+{"level":"warn","timestamp":"2025-08-28 01:15:55","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:15:55","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:15:55","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:15:55","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:16:00","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:16:00","msg":"Server started"}
+{"level":"warn","timestamp":"2025-08-28 01:16:53","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:16:53","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:16:53","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:16:53","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:16:55","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:16:55","msg":"Server started"}
+{"level":"warn","timestamp":"2025-08-28 01:19:00","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:19:00","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:19:00","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:19:00","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:19:02","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:19:02","msg":"Server started"}
+{"level":"warn","timestamp":"2025-08-28 01:22:03","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:22:03","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:22:03","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:22:03","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:22:06","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:22:06","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 01:22:07","msg":"Failed to create new user","error":"user already exists"}
+{"level":"info","timestamp":"2025-08-28 01:22:07","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":409,"duration":0.168238417,"size":32}
+{"level":"warn","timestamp":"2025-08-28 01:22:34","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:22:34","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:22:34","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:22:34","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:22:36","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:22:36","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 01:22:37","msg":"Failed to create new user","error":"user already exists"}
+{"level":"info","timestamp":"2025-08-28 01:22:37","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":409,"duration":0.171882333,"size":32}
+{"level":"warn","timestamp":"2025-08-28 01:25:18","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:25:18","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:25:18","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:25:18","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:25:20","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:25:20","msg":"Server started"}
+{"level":"warn","timestamp":"2025-08-28 01:28:48","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:28:48","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:28:48","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:28:48","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:28:50","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:28:50","msg":"Server started"}
+{"level":"warn","timestamp":"2025-08-28 01:29:51","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:29:51","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:29:51","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:29:51","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:29:53","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:29:53","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-28 01:29:55","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":401,"duration":0.29418775,"size":25}
+{"level":"warn","timestamp":"2025-08-28 01:33:29","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:33:29","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:33:29","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:33:29","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:33:31","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:33:31","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 01:33:33","msg":"Failed to create new user","error":"user already exists"}
+{"level":"info","timestamp":"2025-08-28 01:33:33","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":409,"duration":0.168988542,"size":32}
+{"level":"info","timestamp":"2025-08-28 01:33:37","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":401,"duration":0.287154125,"size":25}
+{"level":"warn","timestamp":"2025-08-28 01:38:24","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:38:24","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:38:24","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:38:24","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:38:26","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:38:26","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-28 01:38:32","msg":"Failed to create new user","error":"user already exists"}
+{"level":"info","timestamp":"2025-08-28 01:38:32","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":409,"duration":0.165752875,"size":32}
+{"level":"info","timestamp":"2025-08-28 01:38:39","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":401,"duration":0.310488083,"size":25}
+{"level":"warn","timestamp":"2025-08-28 01:40:39","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:40:39","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-28 01:40:39","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-28 01:40:39","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-28 01:40:42","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-28 01:40:42","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-28 01:40:46","msg":"Handled HTTP request","uri":"/user/register","method":"POST","status":200,"duration":0.303418542,"size":0}
+{"level":"info","timestamp":"2025-08-28 01:40:55","msg":"Handled HTTP request","uri":"/user/test","method":"POST","status":405,"duration":0.000042333,"size":0}
+{"level":"info","timestamp":"2025-08-28 01:41:00","msg":"Handled HTTP request","uri":"/user/test","method":"GET","status":200,"duration":0.000037334,"size":2}
+{"level":"info","timestamp":"2025-08-28 01:41:30","msg":"Handled HTTP request","uri":"/user/login","method":"GET","status":405,"duration":0.000024834,"size":0}
+{"level":"info","timestamp":"2025-08-28 01:41:34","msg":"Handled HTTP request","uri":"/user/login","method":"POST","status":200,"duration":0.155283917,"size":0}
+{"level":"info","timestamp":"2025-08-29 10:36:37","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-29 10:36:37","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-29 10:37:51","msg":"Handled HTTP request","uri":"/api/user/orders","method":"GET","status":404,"duration":0.0001085,"size":19}
+{"level":"info","timestamp":"2025-08-29 10:38:23","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":404,"duration":0.000091958,"size":19}
+{"level":"warn","timestamp":"2025-08-29 10:42:14","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 10:42:14","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-29 10:42:14","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-29 10:42:14","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 10:42:43","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-29 10:42:43","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-29 10:42:47","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":401,"duration":0.000086375,"size":31}
+{"level":"info","timestamp":"2025-08-29 10:43:57","msg":"Handled HTTP request","uri":"/api/user/register","method":"POST","status":401,"duration":0.00017825,"size":31}
+{"level":"warn","timestamp":"2025-08-29 10:51:01","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 10:51:01","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-29 10:51:01","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-29 10:51:01","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 10:51:03","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-29 10:51:03","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-29 10:51:10","msg":"Handled HTTP request","uri":"/api/user/register","method":"POST","status":500,"duration":0.000529625,"size":99}
+{"level":"info","timestamp":"2025-08-29 10:51:23","msg":"Handled HTTP request","uri":"/api/user/register","method":"POST","status":200,"duration":0.300442458,"size":0}
+{"level":"info","timestamp":"2025-08-29 10:51:47","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":404,"duration":0.000155709,"size":19}
+{"level":"warn","timestamp":"2025-08-29 10:54:45","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 10:54:45","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-29 10:54:45","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-29 10:54:45","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 10:59:29","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-29 10:59:29","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-29 10:59:32","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":401,"duration":0.000930958,"size":31}
+{"level":"warn","timestamp":"2025-08-29 11:01:30","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 11:01:30","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-29 11:01:30","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-29 11:01:30","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 11:01:32","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-29 11:01:32","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-29 11:01:57","msg":"Handled HTTP request","uri":"/api/user/login","method":"POST","status":200,"duration":0.1637915,"size":0}
+{"level":"error","timestamp":"2025-08-29 11:02:01","msg":"Login: order invalid"}
+{"level":"info","timestamp":"2025-08-29 11:02:01","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":422,"duration":0.000515,"size":38}
+{"level":"warn","timestamp":"2025-08-29 11:03:14","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 11:03:14","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-29 11:03:14","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-29 11:03:14","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 11:03:16","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-29 11:03:16","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-29 11:03:18","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":400,"duration":0.000760459,"size":12}
+{"level":"warn","timestamp":"2025-08-29 11:04:45","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 11:04:45","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-29 11:04:45","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-29 11:04:45","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 11:04:47","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-29 11:04:47","msg":"Server started"}
+{"level":"error","timestamp":"2025-08-29 11:04:53","msg":"Login: order invalid"}
+{"level":"info","timestamp":"2025-08-29 11:04:53","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":422,"duration":0.001194584,"size":26}
+{"level":"error","timestamp":"2025-08-29 11:05:19","msg":"Login: ERROR: relation \"orders\" does not exist (SQLSTATE 42P01)"}
+{"level":"info","timestamp":"2025-08-29 11:05:19","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":500,"duration":0.009052875,"size":71}
+{"level":"warn","timestamp":"2025-08-29 11:07:47","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 11:07:47","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-29 11:07:47","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-29 11:07:47","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 11:07:51","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-29 11:07:51","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-29 11:07:54","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":202,"duration":0.008739167,"size":0}
+{"level":"info","timestamp":"2025-08-29 11:08:02","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":200,"duration":0.001298125,"size":0}
+{"level":"info","timestamp":"2025-08-29 11:08:23","msg":"Failed to get user","error":"user not found"}
+{"level":"info","timestamp":"2025-08-29 11:08:23","msg":"Handled HTTP request","uri":"/api/user/login","method":"POST","status":404,"duration":0.001916083,"size":27}
+{"level":"info","timestamp":"2025-08-29 11:08:31","msg":"Handled HTTP request","uri":"/api/user/register","method":"POST","status":200,"duration":0.296042708,"size":0}
+{"level":"error","timestamp":"2025-08-29 11:09:10","msg":"Login: order already exist"}
+{"level":"info","timestamp":"2025-08-29 11:09:10","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":409,"duration":0.002866917,"size":32}
+{"level":"error","timestamp":"2025-08-29 11:09:24","msg":"Login: order invalid"}
+{"level":"info","timestamp":"2025-08-29 11:09:24","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":422,"duration":0.00072125,"size":26}
+{"level":"warn","timestamp":"2025-08-29 13:10:27","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 13:10:27","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-29 13:10:27","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-29 13:10:27","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 13:10:31","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-29 13:10:31","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-29 13:10:38","msg":"Handled HTTP request","uri":"/api/user/orders","method":"GET","status":409,"duration":0.003005125,"size":32}
+{"level":"warn","timestamp":"2025-08-29 13:11:27","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 13:11:27","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-29 13:11:27","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-29 13:11:27","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 13:11:30","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-29 13:11:30","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-29 13:11:32","msg":"Handled HTTP request","uri":"/api/user/orders","method":"GET","status":200,"duration":0.002840375,"size":2}
+{"level":"info","timestamp":"2025-08-29 13:11:42","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":422,"duration":0.000575667,"size":26}
+{"level":"info","timestamp":"2025-08-29 13:11:54","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":422,"duration":0.00013425,"size":26}
+{"level":"info","timestamp":"2025-08-29 13:12:07","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":202,"duration":0.012850125,"size":0}
+{"level":"info","timestamp":"2025-08-29 13:12:47","msg":"Handled HTTP request","uri":"/api/user/orders","method":"GET","status":200,"duration":0.001028875,"size":300}
+{"level":"warn","timestamp":"2025-08-29 13:16:42","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 13:16:43","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-29 13:16:43","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-29 13:16:43","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 13:16:45","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-29 13:16:45","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-29 13:16:46","msg":"Handled HTTP request","uri":"/api/user/orders","method":"GET","status":200,"duration":0.004214042,"size":90}
+{"level":"info","timestamp":"2025-08-29 13:24:20","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":202,"duration":0.054236542,"size":0}
+{"level":"info","timestamp":"2025-08-29 13:24:24","msg":"Handled HTTP request","uri":"/api/user/orders","method":"GET","status":200,"duration":0.001323333,"size":177}
+{"level":"warn","timestamp":"2025-08-29 13:24:42","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 13:24:42","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-29 13:24:42","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-29 13:24:42","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 13:24:46","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-29 13:24:46","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-29 13:25:48","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":202,"duration":0.010606083,"size":0}
+{"level":"info","timestamp":"2025-08-29 13:25:51","msg":"Handled HTTP request","uri":"/api/user/orders","method":"GET","status":200,"duration":0.001413458,"size":258}
+{"level":"warn","timestamp":"2025-08-29 13:45:44","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 13:45:44","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-08-29 13:45:44","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-08-29 13:45:44","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-08-29 13:45:47","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-08-29 13:45:47","msg":"Server started"}
+{"level":"info","timestamp":"2025-08-29 13:45:53","msg":"Handled HTTP request","uri":"/api/user/balance","method":"GET","status":200,"duration":0.004946916,"size":27}
+{"level":"fatal","timestamp":"2025-09-01 13:27:47","msg":"failed to setup database","error":"failed to migrate database: ERROR: there is no unique constraint matching given keys for referenced table \"order_histories\" (SQLSTATE 42830)"}
+{"level":"fatal","timestamp":"2025-09-01 13:31:03","msg":"failed to setup database","error":"failed to migrate database: ERROR: cannot drop constraint uni_orders_order_number on table orders because other objects depend on it (SQLSTATE 2BP01)"}
+{"level":"fatal","timestamp":"2025-09-01 13:34:46","msg":"failed to setup database","error":"failed to migrate database: ERROR: relation \"orders\" does not exist (SQLSTATE 42P01)"}
+{"level":"fatal","timestamp":"2025-09-01 13:35:31","msg":"failed to setup database","error":"failed to migrate database: ERROR: relation \"orders\" does not exist (SQLSTATE 42P01)"}
+{"level":"fatal","timestamp":"2025-09-01 13:36:06","msg":"failed to setup database","error":"failed to migrate database: ERROR: relation \"order_histories\" does not exist (SQLSTATE 42P01)"}
+{"level":"fatal","timestamp":"2025-09-01 13:41:41","msg":"failed to setup database","error":"ERROR: relation \"orders\" does not exist (SQLSTATE 42P01)"}
+{"level":"fatal","timestamp":"2025-09-01 13:44:51","msg":"failed to setup database","error":"ERROR: relation \"orders\" does not exist (SQLSTATE 42P01)"}
+{"level":"fatal","timestamp":"2025-09-01 13:51:53","msg":"failed to setup database","error":"ERROR: relation \"orders\" does not exist (SQLSTATE 42P01)"}
+{"level":"fatal","timestamp":"2025-09-01 13:53:11","msg":"failed to setup database","error":"ERROR: relation \"orders\" does not exist (SQLSTATE 42P01)"}
+{"level":"fatal","timestamp":"2025-09-01 13:57:08","msg":"failed to setup database","error":"ERROR: relation \"orders\" does not exist (SQLSTATE 42P01)"}
+{"level":"fatal","timestamp":"2025-09-01 14:13:47","msg":"failed to setup database","error":"failed to parse field: History, error: invalid field found for struct github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/models.OrderHistory's field Order: define a valid foreign key for relations or implement the Valuer/Scanner interface"}
+{"level":"fatal","timestamp":"2025-09-01 14:15:36","msg":"failed to setup database","error":"failed to parse field: History, error: invalid field found for struct github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/models.OrderHistory's field Order: define a valid foreign key for relations or implement the Valuer/Scanner interface"}
+{"level":"info","timestamp":"2025-09-01 14:17:02","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-01 14:17:02","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-09-01 14:17:02","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-01 14:17:07","msg":"order loader stopped","error":"context canceled"}
+{"level":"warn","timestamp":"2025-09-01 14:17:07","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 14:17:07","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-01 14:17:07","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-01 14:17:07","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-01 14:17:07","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 14:22:30","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-01 14:22:30","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-09-01 14:22:30","msg":"Server started"}
+{"level":"warn","timestamp":"2025-09-01 14:29:04","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 14:29:04","msg":"order loader stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-01 14:29:04","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-01 14:29:04","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-01 14:29:04","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-01 14:29:04","msg":"ENDED Graceful Shutdown"}
+{"level":"fatal","timestamp":"2025-09-01 14:30:11","msg":"failed to setup database","error":"ERROR: there is no unique constraint matching given keys for referenced table \"order_histories\" (SQLSTATE 42830)"}
+{"level":"fatal","timestamp":"2025-09-01 14:33:55","msg":"failed to setup database","error":"ERROR: relation \"orders\" does not exist (SQLSTATE 42P01)"}
+{"level":"info","timestamp":"2025-09-01 15:40:52","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-01 15:40:52","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-09-01 15:40:52","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-01 15:40:56","msg":"order listener stopped","error":"context canceled"}
+{"level":"warn","timestamp":"2025-09-01 15:40:56","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 15:40:56","msg":"order loader stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-01 15:40:56","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-01 15:40:56","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-01 15:40:56","msg":"ENDED Graceful Shutdown"}
