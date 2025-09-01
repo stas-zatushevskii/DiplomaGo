@@ -487,3 +487,21 @@
 {"level":"info","timestamp":"2025-09-01 16:19:06","msg":"shutdown: server closed"}
 {"level":"info","timestamp":"2025-09-01 16:19:06","msg":"shutdown: database closed"}
 {"level":"warn","timestamp":"2025-09-01 16:19:06","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 16:24:48","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-01 16:24:48","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-01 16:24:48","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-01 16:26:02","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-01 16:26:02","msg":"order loader stopped","error":"context canceled"}
+{"level":"warn","timestamp":"2025-09-01 16:26:02","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 16:26:02","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-01 16:26:02","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-01 16:26:02","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 16:26:05","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-01 16:26:05","msg":"Starting server: ","address":"127.0.0.1:8081"}
+{"level":"info","timestamp":"2025-09-01 16:26:05","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-01 16:26:07","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-01 16:26:07","msg":"order loader stopped","error":"context canceled"}
+{"level":"warn","timestamp":"2025-09-01 16:26:07","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 16:26:07","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-01 16:26:07","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-01 16:26:07","msg":"ENDED Graceful Shutdown"}
