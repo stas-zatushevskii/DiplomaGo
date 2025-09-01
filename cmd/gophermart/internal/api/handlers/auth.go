@@ -78,7 +78,6 @@ func (h *Handler) Register() http.HandlerFunc {
 			Value:   jwt,
 		})
 		w.WriteHeader(http.StatusOK)
-		return
 	}
 }
 
