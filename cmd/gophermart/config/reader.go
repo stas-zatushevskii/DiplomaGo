@@ -6,7 +6,6 @@ import (
 	CustomErrors "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/errors"
 	"go.uber.org/zap"
 	"gopkg.in/yaml.v3"
-	"log"
 	"net/url"
 	"os"
 	"strings"
@@ -44,34 +43,42 @@ func ConvertPostgresURLToDSN(urlStr string) (string, error) {
 	return dsn, nil
 }
 
-func (cfg *Config) parseFlags() {
+func (cfg *Config) parseFlags() error {
 	var (
-		connPath   string
-		accrualAdr string
-		serverAddr string
+		connPathFlag   string
+		accrualAddrFlg string
+		serverAddrFlg  string
 	)
 
-	flag.StringVar(&serverAddr, "a", "127.0.0.1:8080", "address to listen")
-	flag.StringVar(&connPath, "d", "", "database connection path")
-	flag.StringVar(&accrualAdr, "r", "", "accrual url")
+	flag.StringVar(&serverAddrFlg, "a", "", "address to listen (e.g. 127.0.0.1:8080)")
+	flag.StringVar(&connPathFlag, "d", "", "database connection URL (postgres://...)")
+	flag.StringVar(&accrualAddrFlg, "r", "", "accrual service URL/address")
 	flag.Parse()
 
-	if connPath != "" {
-		dsn, err := ConvertPostgresURLToDSN(connPath)
+	if serverAddrFlg != "" {
+		cfg.Server.Address = serverAddrFlg
+	}
+
+	if accrualAddrFlg != "" {
+		cfg.Accrual.Address = accrualAddrFlg
+	}
+
+	if connPathFlag != "" {
+		dsn, err := ConvertPostgresURLToDSN(connPathFlag)
 		if err != nil {
-			log.Fatal(err)
-			return
+			return fmt.Errorf("invalid -d value: %w", err)
+		}
+		cfg.Database.ConnPath = connPathFlag
+		cfg.Database.Dsn = dsn
+	} else if cfg.Database.ConnPath != "" && cfg.Database.Dsn == "" {
+		dsn, err := ConvertPostgresURLToDSN(cfg.Database.ConnPath)
+		if err != nil {
+			return fmt.Errorf("invalid ConnPath in file: %w", err)
 		}
 		cfg.Database.Dsn = dsn
 	}
 
-	if accrualAdr != "" {
-		cfg.Accrual.Address = accrualAdr
-	}
-
-	if serverAddr != "127.0.0.1:8080" {
-		cfg.Server.Address = serverAddr
-	}
+	return nil
 }
 
 func DefaultConfigBuilder() *Config {
@@ -96,26 +103,27 @@ func DefaultConfigBuilder() *Config {
 	}
 }
 
-func (cfg *NewConfig) ParseConfig() error {
-	f, err := os.ReadFile("../../config/cfg.yml")
+func (c *NewConfig) ParseConfigFromFile(path string) error {
+	data, err := os.ReadFile(path)
 	if err != nil {
-		cfg.log.Error("failed to read config file", zap.Error(err))
-		cfg.config = DefaultConfigBuilder()
+		c.log.Warn("config file not found, falling back to defaults", zap.String("path", path), zap.Error(err))
+		c.config = DefaultConfigBuilder()
 		return CustomErrors.ErrConfigNotFound
 	}
-	if err := yaml.Unmarshal(f, &cfg.config); err != nil {
-		cfg.log.Error("failed to parse config file", zap.Error(err))
+	if err := yaml.Unmarshal(data, c.config); err != nil {
+		c.log.Error("failed to parse config file", zap.Error(err))
 		return err
 	}
 	return nil
 }
 
 func LoadConfig(log *zap.Logger) (*Config, error) {
-	cfg := &NewConfig{
-		log:    log,
-		config: new(Config),
+	nc := &NewConfig{log: log, config: new(Config)}
+
+	_ = nc.ParseConfigFromFile("../../config/cfg.yml")
+
+	if err := nc.config.parseFlags(); err != nil {
+		return nil, err
 	}
-	err := cfg.ParseConfig()
-	cfg.config.parseFlags()
-	return cfg.config, err
+	return nc.config, nil
 }
