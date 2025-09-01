@@ -49,7 +49,7 @@ func (cfg *Config) parseFlags() {
 		accrualAdr string
 		serverAddr string
 	)
-	flag.StringVar(&serverAddr, "a", "127.0.0.1:8081", "address to listen")
+	flag.StringVar(&serverAddr, "a", "127.0.0.1:8080", "address to listen")
 	flag.StringVar(&connPath, "d", "", "database connection path")
 	flag.StringVar(&accrualAdr, "r", "", "accrual url")
 	flag.Parse()
@@ -65,7 +65,7 @@ func (cfg *Config) parseFlags() {
 	if accrualAdr != "" {
 		cfg.Accrual.Address = accrualAdr
 	}
-	if serverAddr != "127.0.0.1:8081" {
+	if serverAddr != "127.0.0.1:8080" {
 		cfg.Accrual.Address = serverAddr
 	}
 }
