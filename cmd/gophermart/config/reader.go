@@ -50,9 +50,9 @@ func (cfg *Config) parseFlags() error {
 		serverAddrFlg  string
 	)
 
-	flag.StringVar(&serverAddrFlg, "-a", "", "address to listen (e.g. 127.0.0.1:8080)")
-	flag.StringVar(&connPathFlag, "-d", "", "database connection URL (postgres://...)")
-	flag.StringVar(&accrualAddrFlg, "-r", "", "accrual service URL/address")
+	flag.StringVar(&serverAddrFlg, "a", "", "address to listen (e.g. 127.0.0.1:8080)")
+	flag.StringVar(&connPathFlag, "d", "", "database connection URL (postgres://...)")
+	flag.StringVar(&accrualAddrFlg, "r", "", "accrual service URL/address")
 	flag.Parse()
 
 	if serverAddrFlg != "" {

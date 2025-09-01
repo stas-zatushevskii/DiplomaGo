@@ -505,3 +505,31 @@
 {"level":"info","timestamp":"2025-09-01 16:26:07","msg":"shutdown: server closed"}
 {"level":"info","timestamp":"2025-09-01 16:26:07","msg":"shutdown: database closed"}
 {"level":"warn","timestamp":"2025-09-01 16:26:07","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 16:52:51","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-01 16:52:51","msg":"Starting server: ","address":"127.0.0.1:9090"}
+{"level":"info","timestamp":"2025-09-01 16:52:51","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-01 16:52:53","msg":"order listener stopped","error":"context canceled"}
+{"level":"warn","timestamp":"2025-09-01 16:52:53","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 16:52:53","msg":"order loader stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-01 16:52:53","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-01 16:52:53","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-01 16:52:53","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 16:56:37","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-01 16:56:37","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-01 16:56:37","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-01 16:56:41","msg":"order loader stopped","error":"context canceled"}
+{"level":"warn","timestamp":"2025-09-01 16:56:41","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 16:56:41","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-01 16:56:41","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-01 16:56:41","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-01 16:56:41","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 16:56:50","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-01 16:56:50","msg":"Starting server: ","address":"1123"}
+{"level":"info","timestamp":"2025-09-01 16:56:50","msg":"Server started"}
+{"level":"error","timestamp":"2025-09-01 16:56:50","msg":"Failed to start server","error":"listen tcp: address 1123: missing port in address"}
+{"level":"warn","timestamp":"2025-09-01 16:59:42","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-01 16:59:42","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-01 16:59:42","msg":"order loader stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-01 16:59:42","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-01 16:59:42","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-01 16:59:42","msg":"ENDED Graceful Shutdown"}
