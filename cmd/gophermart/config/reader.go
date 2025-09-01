@@ -43,7 +43,7 @@ func ConvertPostgresURLToDSN(urlStr string) (string, error) {
 	return dsn, nil
 }
 
-func (cfg *Config) parseFlags() error {
+func (cfg *Config) parseFlags(logger *zap.Logger) error {
 	var (
 		connPathFlag   string
 		accrualAddrFlg string
@@ -57,16 +57,12 @@ func (cfg *Config) parseFlags() error {
 
 	if serverAddrFlg != "" {
 		cfg.Server.Address = serverAddrFlg
-		fmt.Println("-----------------------------------------------------------")
-		fmt.Println(serverAddrFlg)
-		fmt.Println("-----------------------------------------------------------")
+		logger.Info("Server address", zap.String("address", cfg.Server.Address))
 	}
 
 	if accrualAddrFlg != "" {
 		cfg.Accrual.Address = accrualAddrFlg
-		fmt.Println("-----------------------------------------------------------")
-		fmt.Println(accrualAddrFlg)
-		fmt.Println("-----------------------------------------------------------")
+		logger.Info("Accrual address", zap.String("address", cfg.Accrual.Address))
 	}
 
 	if connPathFlag != "" {
@@ -76,24 +72,16 @@ func (cfg *Config) parseFlags() error {
 		}
 		cfg.Database.ConnPath = connPathFlag
 		cfg.Database.Dsn = dsn
-		fmt.Println("-----------------------------------------------------------")
-		fmt.Println(dsn)
-		fmt.Println("-----------------------------------------------------------")
-	} else if cfg.Database.ConnPath != "" && cfg.Database.Dsn == "" {
-		dsn, err := ConvertPostgresURLToDSN(cfg.Database.ConnPath)
-		if err != nil {
-			return fmt.Errorf("invalid ConnPath in file: %w", err)
-		}
-		cfg.Database.Dsn = dsn
+		logger.Info("Database connection URL", zap.String("url", dsn))
+		logger.Info("Database connection DSN", zap.String("dsn", dsn))
 	}
-
 	return nil
 }
 
 func DefaultConfigBuilder() *Config {
 	return &Config{
 		Database: Database{
-			ConnPath: "postgres://postgres:123@localhost:1231231231231231311231131212312312312312312123123/postgres",
+			ConnPath: "postgres://postgres:123@localhost:5432/postgres",
 			Dsn:      "host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable",
 		},
 		Accrual: Accrual{
@@ -131,7 +119,7 @@ func LoadConfig(log *zap.Logger) (*Config, error) {
 
 	_ = nc.ParseConfigFromFile("../../config/cfg.yml")
 
-	if err := nc.config.parseFlags(); err != nil {
+	if err := nc.config.parseFlags(log); err != nil {
 		return nil, err
 	}
 	log.Info(nc.config.Database.Dsn)
