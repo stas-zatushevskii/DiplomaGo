@@ -93,7 +93,7 @@ func (cfg *Config) parseFlags() error {
 func DefaultConfigBuilder() *Config {
 	return &Config{
 		Database: Database{
-			ConnPath: "postgres://postgres:123@localhost:5432/postgres",
+			ConnPath: "postgres://postgres:123@localhost:1231231231231231311231131212312312312312312123123/postgres",
 			Dsn:      "host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable",
 		},
 		Accrual: Accrual{
