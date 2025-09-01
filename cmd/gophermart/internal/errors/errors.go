@@ -11,4 +11,5 @@ var (
 	ErrOrderAlreadyUsed  = errors.New("order already used")
 	ErrNotEnoughBalance  = errors.New("not enough balance")
 	ErrNoWithdrawals     = errors.New("no withdrawals")
+	ErrConfigNotFound    = errors.New("config not found")
 )

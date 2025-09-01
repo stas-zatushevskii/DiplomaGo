@@ -3,6 +3,7 @@ package config
 import (
 	"flag"
 	"fmt"
+	CustomErrors "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/errors"
 	"go.uber.org/zap"
 	"gopkg.in/yaml.v3"
 	"log"
@@ -70,11 +71,34 @@ func (cfg *Config) parseFlags() {
 	}
 }
 
+func DefaultConfigBuilder() *Config {
+	return &Config{
+		Database: Database{
+			ConnPath: "postgres://postgres:123@localhost:5432/postgres",
+			Dsn:      "host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable",
+		},
+		Accrual: Accrual{
+			Address: "127.0.0.1:8080",
+		},
+		App: AppConfig{
+			DebugStatus:     true,
+			NumberOfWorkers: 10,
+		},
+		Server: Server{
+			Address: "127.0.0.1:8080",
+		},
+		JWT: JWT{
+			Secret: "secret",
+		},
+	}
+}
+
 func (cfg *NewConfig) ParseConfig() error {
 	f, err := os.ReadFile("../../config/cfg.yml")
 	if err != nil {
 		cfg.log.Error("failed to read config file", zap.Error(err))
-		return err
+		cfg.config = DefaultConfigBuilder()
+		return CustomErrors.ErrConfigNotFound
 	}
 	if err := yaml.Unmarshal(f, &cfg.config); err != nil {
 		cfg.log.Error("failed to parse config file", zap.Error(err))
