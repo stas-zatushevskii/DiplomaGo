@@ -22,7 +22,7 @@ func (o *ServiceOrder) SendRequest(orderNumber string) (*models.AccrualResponse,
 	if err != nil {
 		return nil, err
 	}
-	if resp.StatusCode != http.StatusOK {
+	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusNoContent {
 		return nil, fmt.Errorf("http status code: %d", resp.StatusCode)
 	}
 	body, _ := io.ReadAll(resp.Body)

@@ -12,4 +12,5 @@ var (
 	ErrNotEnoughBalance  = errors.New("not enough balance")
 	ErrNoWithdrawals     = errors.New("no withdrawals")
 	ErrConfigNotFound    = errors.New("config not found")
+	ErrAccrualNoContent  = errors.New("accrual response status: 204")
 )
