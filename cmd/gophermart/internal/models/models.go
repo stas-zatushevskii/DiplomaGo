@@ -15,16 +15,16 @@ type User struct {
 }
 
 type UserBalance struct {
-	Accrual          utils.Money `json:"accrual"`
-	WithdrawnAccrual utils.Money `json:"withdrawn"`
+	Accrual          utils.Money `json:"Current"`
+	WithdrawnAccrual utils.Money `json:"Withdrawn"`
 }
 
 func (u UserBalance) MarshalJSON() (data []byte, err error) {
 	type aliasData UserBalance
 	aliasValue := struct {
 		aliasData
-		Accrual          float64 `json:"accrual"`
-		WithdrawnAccrual float64 `json:"withdrawn"`
+		Accrual          float64 `json:"Current"`
+		WithdrawnAccrual float64 `json:"Withdrawn"`
 	}{
 		aliasData:        aliasData(u),
 		Accrual:          utils.Money.ToFloat(u.Accrual),
