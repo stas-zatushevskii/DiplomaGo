@@ -25,15 +25,9 @@ func (o *ServiceOrder) AddNewSingleOrder(orderNumber string, userID uint) error 
 	if !ok {
 		return customErr.ErrOrderInvalid
 	}
-	newOrder, err := o.database.CreateNewOrder(orderNumber, userID)
+	_, err := o.database.CreateProcessedOrder(orderNumber, userID)
 	if err != nil {
-		return fmt.Errorf("error adding single order: %w", err)
+		return fmt.Errorf("error adding processed order: %w", err)
 	}
-	o.logger.Info(fmt.Sprintf("Adding single order to the order list: %s", newOrder.OrderNumber))
-	err = o.ProcessOrder(newOrder.OrderNumber)
-	if err != nil {
-		return fmt.Errorf("error processing single order: %w", err)
-	}
-
 	return nil
 }

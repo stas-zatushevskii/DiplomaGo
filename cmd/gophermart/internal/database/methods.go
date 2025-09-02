@@ -66,6 +66,14 @@ func (d *Database) DecreaseOrderAccrual(orderNumber string, withdraw utils.Money
 	return res.Error
 }
 
+func (d *Database) DecreaseOrderAccrualVersion2(orderNumber string, withdraw utils.Money) error {
+	res := d.GormDB.Model(&models.Order{}).
+		Where("order_number = ?", orderNumber).
+		UpdateColumn("withdrawn_accrual", gorm.Expr("withdrawn_accrual + ?", withdraw))
+
+	return res.Error
+}
+
 func (d *Database) GetUserBalance(userID uint) (utils.Money, error) {
 	var balance utils.Money
 
@@ -202,6 +210,37 @@ func (d *Database) CreateNewOrder(orderNumber string, userID uint) (*models.Orde
 			OrderNumber: orderNumber,
 			UserID:      &userID,
 			Status:      constants.OrderStatusNew,
+			CreatedAt:   time.Now().Format(time.RFC3339),
+		}
+
+		if err := d.GormDB.Create(&newOrder).Error; err != nil {
+			return nil, err
+		}
+		return &newOrder, nil
+	default:
+		return nil, err
+	}
+}
+
+func (d *Database) CreateProcessedOrder(orderNumber string, userID uint) (*models.Order, error) {
+
+	var existing models.Order
+	err := d.GormDB.
+		Select("id", "user_id").
+		Where("order_number = ?", orderNumber).
+		Take(&existing).Error
+
+	switch {
+	case err == nil:
+		if existing.UserID != nil && *existing.UserID == userID { // order found and userID == requested UserID
+			return nil, customErrors.ErrOrderAlreadyUsed
+		}
+		return nil, customErrors.ErrOrderAlreadyExist // order found and userID != requested UserID
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		newOrder := models.Order{
+			OrderNumber: orderNumber,
+			UserID:      &userID,
+			Status:      constants.OrderStatusProcessed,
 			CreatedAt:   time.Now().Format(time.RFC3339),
 		}
 

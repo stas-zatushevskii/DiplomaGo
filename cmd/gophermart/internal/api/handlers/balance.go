@@ -68,7 +68,7 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 			http.Error(w, utils.ErrorAsJSON(err), http.StatusBadRequest)
 			return
 		}
-		err = h.service.OrderService.AddNewSingleOrder(requestData.Order, userID) // linear processing, no goroutines, just waiting response from accrual
+		err = h.service.OrderService.AddNewSingleOrder(requestData.Order, userID) // adding new order in database with status Processed
 		if err != nil {
 			switch {
 			case errors.Is(err, CustomErrors.ErrOrderAlreadyExist):
@@ -86,7 +86,12 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 				return
 			}
 		}
-		err = h.service.OrderService.Withdraw(requestData.Withdrawn, requestData.Order)
+		userBalance, err := h.service.UserService.GetUserBalance(userID)
+		if err != nil {
+			h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
+			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		}
+		err = h.service.OrderService.WithdrawVersion2(requestData.Withdrawn, requestData.Order, userBalance.Accrual)
 		if err != nil {
 			switch {
 			case errors.Is(err, CustomErrors.ErrOrdersNotFound):
