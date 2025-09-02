@@ -44,6 +44,10 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const HandlerName = "WithdrawOrderAccrual"
 		var requestData withdrawBalanceData
+		userID, ok := r.Context().Value(constants.UserIDKey).(uint)
+		if !ok {
+			http.Error(w, utils.ErrorAsJSON(CustomErrors.ErrUserNotFound), http.StatusUnauthorized)
+		}
 		body, err := io.ReadAll(r.Body)
 
 		if err != nil {
@@ -63,6 +67,24 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 			h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
 			http.Error(w, utils.ErrorAsJSON(err), http.StatusBadRequest)
 			return
+		}
+		err = h.service.OrderService.AddNewSingleOrder(requestData.Order, userID) // linear processing, no goroutines, just waiting response from accrual
+		if err != nil {
+			switch {
+			case errors.Is(err, CustomErrors.ErrOrderAlreadyExist):
+				http.Error(w, utils.ErrorAsJSON(err), http.StatusConflict)
+				return
+			case errors.Is(err, CustomErrors.ErrOrderAlreadyUsed):
+				w.WriteHeader(http.StatusOK)
+				return
+			case errors.Is(err, CustomErrors.ErrOrderInvalid):
+				http.Error(w, utils.ErrorAsJSON(err), http.StatusUnprocessableEntity)
+				return
+			default:
+				h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
+				http.Error(w, utils.ErrorAsJSON(err), http.StatusInternalServerError)
+				return
+			}
 		}
 		err = h.service.OrderService.Withdraw(requestData.Withdrawn, requestData.Order)
 		if err != nil {
