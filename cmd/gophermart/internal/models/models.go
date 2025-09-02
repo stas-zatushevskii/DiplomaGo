@@ -19,8 +19,8 @@ type User struct {
 // FIXME UserBalance - old version
 
 type UserBalance struct {
-	Accrual          utils.Money `json:"current"`
-	WithdrawnAccrual utils.Money `json:"withdrawn"`
+	Accrual          utils.Money
+	WithdrawnAccrual utils.Money
 }
 
 type ProcessOderData struct {
@@ -32,8 +32,8 @@ func (u UserBalance) MarshalJSON() (data []byte, err error) {
 	type aliasData UserBalance
 	aliasValue := struct {
 		aliasData
-		Accrual          float64 `json:"Current"`
-		WithdrawnAccrual float64 `json:"Withdrawn"`
+		Accrual          float64 `json:"current"`
+		WithdrawnAccrual float64 `json:"withdrawn"`
 	}{
 		aliasData:        aliasData(u),
 		Accrual:          utils.Money.ToFloat(u.Accrual),
