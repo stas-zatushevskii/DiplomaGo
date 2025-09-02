@@ -57,8 +57,9 @@ func (h *Handler) OrdersGet() http.HandlerFunc {
 		if !ok {
 			http.Error(w, utils.ErrorAsJSON(customErrors.ErrUserNotFound), http.StatusUnauthorized)
 		}
-
+		h.logger.Info(fmt.Sprintf(fmt.Sprintf("[%s]DOING REQUEST TO ALL ORDERS WITH --- User ID: %v", HandlerName, userID)))
 		orders, err := h.service.OrderService.GetAllOrders(userID)
+		h.logger.Info(fmt.Sprintf("GOT RESPONSE FROM DB -- %v", orders))
 		if err != nil {
 			if errors.Is(err, customErrors.ErrOrdersNotFound) {
 				http.Error(w, utils.ErrorAsJSON(err), http.StatusNoContent)
