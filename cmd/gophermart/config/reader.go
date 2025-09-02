@@ -105,7 +105,7 @@ func DefaultConfigBuilder() *Config {
 			NumberOfWorkers: 10,
 		},
 		Server: Server{
-			Address: "localhost:8080",
+			Address: "localhost:8081",
 		},
 		JWT: JWT{
 			Secret: "secret",
@@ -128,22 +128,24 @@ func (c *NewConfig) ParseConfigFromFile(path string) error {
 	return nil
 }
 
-// LoadConfig loading config data from: file, flags, env
 func LoadConfig(log *zap.Logger) (*Config, error) {
-	nc := &NewConfig{log: log, config: new(Config)}
+	nc := &NewConfig{log: log, config: DefaultConfigBuilder()}
 
-	err := nc.ParseConfigFromFile("../../config/cfg.yml")
-	if err != nil {
-		return nil, err
-	}
-	if err = nc.config.parseFlags(); err != nil {
-		return nil, err
-	}
-	if err = nc.config.parseVirtualEnvironment(); err != nil {
+	if err := nc.ParseConfigFromFile("../../config/cfg.yml"); err != nil {
 		return nil, err
 	}
 
-	log.Info(nc.config.Database.Dsn)
-	log.Info(nc.config.Database.ConnPath)
+	if err := nc.config.parseVirtualEnvironment(); err != nil {
+		return nil, err
+	}
+
+	if err := nc.config.parseFlags(); err != nil {
+		return nil, err
+	}
+
+	log.Info("dsn", zap.String("dsn", nc.config.Database.Dsn))
+	log.Info("db_url", zap.String("url", nc.config.Database.ConnPath))
+	log.Info("accrual_addr", zap.String("addr", nc.config.Accrual.Address))
+
 	return nc.config, nil
 }

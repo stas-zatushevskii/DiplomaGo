@@ -21,6 +21,9 @@ func (o *ServiceOrder) SendRequest(orderNumber string) (*models.AccrualResponse,
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("http status code: %d", resp.StatusCode)
+	}
 	body, _ := io.ReadAll(resp.Body)
 	resp.Body.Close()
 	err = json.Unmarshal(body, &response)
