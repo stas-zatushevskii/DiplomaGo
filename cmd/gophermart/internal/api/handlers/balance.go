@@ -14,7 +14,10 @@ import (
 func (h *Handler) GetUserBalance() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const HandlerName = "GetUserBalance"
-		userID := r.Context().Value("userID").(uint)
+		userID, ok := r.Context().Value(constants.UserIDKey).(uint)
+		if !ok {
+			http.Error(w, utils.ErrorAsJSON(CustomErrors.ErrUserNotFound), http.StatusUnauthorized)
+		}
 		user, err := h.service.UserService.GetUserBalance(userID)
 		if err != nil {
 			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
@@ -80,7 +83,10 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 func (h *Handler) GetWithdrawalsHistory() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const HandlerName = "GetWithdrawalsHistory"
-		userID := r.Context().Value(constants.UserIDKey).(uint)
+		userID, ok := r.Context().Value(constants.UserIDKey).(uint)
+		if !ok {
+			http.Error(w, utils.ErrorAsJSON(CustomErrors.ErrUserNotFound), http.StatusUnauthorized)
+		}
 		history, err := h.service.OrderService.GetWithdrawByUserID(userID)
 		if err != nil {
 			switch {
