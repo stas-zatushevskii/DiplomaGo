@@ -72,6 +72,7 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 				http.Error(w, utils.ErrorAsJSON(err), http.StatusPaymentRequired)
 				return
 			default:
+				h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
 				http.Error(w, utils.ErrorAsJSON(err), http.StatusInternalServerError)
 				return
 			}
