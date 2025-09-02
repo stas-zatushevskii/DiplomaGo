@@ -35,6 +35,10 @@ func (o *ServiceOrder) ProcessOrder(data models.ProcessOderData) error { // user
 		}
 	case constants.OrderStatusProcessed:
 		// o.database.IncreaseUserBalance(user, accrualResponse.Accrual)
+		err = o.database.IncreaseOrderAccrual(data.OrderNumber, accrualResponse.Accrual)
+		if err != nil {
+			return err
+		}
 		err := o.database.IncreaseUserBalance(data.UserID, accrualResponse.Accrual)
 		if err != nil {
 			return err

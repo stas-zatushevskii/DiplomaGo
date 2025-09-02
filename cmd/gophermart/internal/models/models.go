@@ -47,8 +47,8 @@ type Order struct {
 	User             User                  `json:"-"`
 	Status           constants.OrderStatus `json:"status"`
 	Accrual          utils.Money           `json:"accrual,omitempty"`
-	WithdrawnAccrual utils.Money           `json:"withdrawn,omitempty"`
-	History          []OrderHistory
+	WithdrawnAccrual utils.Money           `json:"sum,omitempty"`
+	History          []OrderHistory        `json:"-"`
 }
 
 func (u Order) MarshalJSON() (data []byte, err error) {
