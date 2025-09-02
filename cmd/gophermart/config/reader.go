@@ -3,7 +3,6 @@ package config
 import (
 	"flag"
 	"fmt"
-	CustomErrors "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/errors"
 	"go.uber.org/zap"
 	"gopkg.in/yaml.v3"
 	"net/url"
@@ -78,6 +77,18 @@ func (cfg *Config) parseFlags(logger *zap.Logger) error {
 	return nil
 }
 
+func (cfg *Config) parseVirtualEnvironment(logger *zap.Logger) {
+	if envRunAddr := os.Getenv("RUN_ADDRESS"); envRunAddr != "" {
+		cfg.Server.Address = envRunAddr
+	}
+	if envConnPath := os.Getenv("DATABASE_URI"); envConnPath != "" {
+		cfg.Database.ConnPath = envConnPath
+	}
+	if envAccrualAddr := os.Getenv("ACCRUAL_SYSTEM_ADDRESS"); envAccrualAddr != "" {
+		cfg.Accrual.Address = envAccrualAddr
+	}
+}
+
 func DefaultConfigBuilder() *Config {
 	return &Config{
 		Database: Database{
@@ -85,14 +96,14 @@ func DefaultConfigBuilder() *Config {
 			Dsn:      "host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable",
 		},
 		Accrual: Accrual{
-			Address: "127.0.0.1:8080",
+			Address: "localhost:8080",
 		},
 		App: AppConfig{
 			DebugStatus:     true,
 			NumberOfWorkers: 10,
 		},
 		Server: Server{
-			Address: "127.0.0.1:8080",
+			Address: "localhost:8080",
 		},
 		JWT: JWT{
 			Secret: "secret",
@@ -105,7 +116,7 @@ func (c *NewConfig) ParseConfigFromFile(path string) error {
 	if err != nil {
 		c.log.Warn("config file not found, falling back to defaults", zap.String("path", path), zap.Error(err))
 		c.config = DefaultConfigBuilder()
-		return CustomErrors.ErrConfigNotFound
+		return nil
 	}
 	if err := yaml.Unmarshal(data, c.config); err != nil {
 		c.log.Error("failed to parse config file", zap.Error(err))
@@ -117,11 +128,15 @@ func (c *NewConfig) ParseConfigFromFile(path string) error {
 func LoadConfig(log *zap.Logger) (*Config, error) {
 	nc := &NewConfig{log: log, config: new(Config)}
 
-	_ = nc.ParseConfigFromFile("../../config/cfg.yml")
-
-	if err := nc.config.parseFlags(log); err != nil {
+	err := nc.ParseConfigFromFile("../../config/cfg.yml")
+	if err != nil {
 		return nil, err
 	}
+	if err = nc.config.parseFlags(log); err != nil {
+		return nil, err
+	}
+	nc.config.parseVirtualEnvironment(log)
+
 	log.Info(nc.config.Database.Dsn)
 	log.Info(nc.config.Database.ConnPath)
 	return nc.config, nil
