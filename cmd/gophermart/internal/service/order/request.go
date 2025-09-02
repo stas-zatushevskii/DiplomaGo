@@ -48,7 +48,7 @@ func (o *ServiceOrder) RequestWithRetry(sender RequestSender, data string) (*mod
 		return nil, err
 	}
 
-	if response.Status == constants.OrderStatusProcessing {
+	if response.Status == constants.OrderStatusProcessed {
 		return response, nil
 	}
 
@@ -66,7 +66,7 @@ func (o *ServiceOrder) RequestWithRetry(sender RequestSender, data string) (*mod
 			return nil, err
 		}
 
-		if response.Status == constants.OrderStatusProcessing {
+		if response.Status == constants.OrderStatusProcessed {
 			return response, nil
 		}
 		if !isRetryable(response.Status) {
