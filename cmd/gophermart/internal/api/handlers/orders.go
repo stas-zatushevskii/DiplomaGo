@@ -28,7 +28,7 @@ func (h *Handler) OrderCreate() http.HandlerFunc {
 			http.Error(w, utils.ErrorAsJSON(customErrors.ErrUserNotFound), http.StatusUnauthorized)
 		}
 
-		err = h.service.OrderService.AddNewOrder(orderNumber, userID)
+		err = h.service.OrderService.AddNewOrder(orderNumber, userID, h.orderChan)
 		if err != nil {
 			switch {
 			case errors.Is(err, customErrors.ErrOrderAlreadyExist):

@@ -98,20 +98,3 @@ func (u AccrualResponse) MarshalJSON() (data []byte, err error) {
 	}
 	return json.Marshal(aliasValue)
 }
-
-type ProcessOrderData struct {
-	Accrual     utils.Money `json:"accrual"`
-	OrderNumber string      `json:"order_number"`
-}
-
-func (u ProcessOrderData) MarshalJSON() (data []byte, err error) {
-	type aliasData ProcessOrderData
-	aliasValue := struct {
-		aliasData
-		Accrual float64 `json:"accrual"`
-	}{
-		aliasData: aliasData(u),
-		Accrual:   utils.Money.ToFloat(u.Accrual),
-	}
-	return json.Marshal(aliasValue)
-}

@@ -5,7 +5,6 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/api/handlers"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/api/middlewares"
-	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/models"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/service"
 	"go.uber.org/zap"
 	"sync"
@@ -13,7 +12,7 @@ import (
 
 type RouterData struct{}
 
-func NewRouter(logger *zap.Logger, service *service.Service, wg *sync.WaitGroup, orderChan chan<- models.ProcessOrderData) *chi.Mux {
+func NewRouter(logger *zap.Logger, service *service.Service, wg *sync.WaitGroup, orderChan chan<- string) *chi.Mux {
 	r := chi.NewRouter()
 
 	r.Use(middlewares.WithWaitGroup(wg))
