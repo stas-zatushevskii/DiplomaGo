@@ -46,8 +46,8 @@ type Order struct {
 	UserID           *uint                 `json:"-"`
 	User             User                  `json:"-"`
 	Status           constants.OrderStatus `json:"status"`
-	Accrual          utils.Money           `json:"accrual,omitempty"`
-	WithdrawnAccrual utils.Money           `json:"sum,omitempty"`
+	Accrual          utils.Money           `json:"-"`
+	WithdrawnAccrual utils.Money           `json:"-"`
 	History          []OrderHistory        `json:"-"`
 }
 
@@ -56,7 +56,7 @@ func (u Order) MarshalJSON() (data []byte, err error) {
 	aliasValue := struct {
 		aliasData
 		Accrual          float64 `json:"accrual,omitempty"`
-		WithdrawnAccrual float64 `json:"withdrawn,omitempty"`
+		WithdrawnAccrual float64 `json:"sum,omitempty"`
 	}{
 		aliasData:        aliasData(u),
 		Accrual:          utils.Money.ToFloat(u.Accrual),
@@ -70,7 +70,7 @@ type OrderHistory struct {
 	ID          uint        `gorm:"primaryKey" json:"-"`
 	OrderID     *uint       `gorm:"uniqueIndex" json:"-"`
 	OrderNumber string      `json:"order"`
-	Sum         utils.Money `json:"sum"`
+	Sum         utils.Money `json:"-"`
 	ProcessedAt string      `json:"processed_at"`
 	Order       Order       `json:"-"`
 }
@@ -79,7 +79,7 @@ func (u OrderHistory) MarshalJSON() (data []byte, err error) {
 	type aliasData OrderHistory
 	aliasValue := struct {
 		aliasData
-		Sum float64 `json:"accrual"`
+		Sum float64 `json:"sum"`
 	}{
 		aliasData: aliasData(u),
 		Sum:       utils.Money.ToFloat(u.Sum),
