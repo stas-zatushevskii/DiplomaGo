@@ -23,7 +23,11 @@ func (h *Handler) OrderCreate() http.HandlerFunc {
 		r.Body.Close()
 
 		orderNumber := string(body)
-		userID := r.Context().Value("UserID").(uint)
+		userID, ok := r.Context().Value(constants.UserIDKey).(uint)
+		if !ok {
+			http.Error(w, utils.ErrorAsJSON(customErrors.ErrUserNotFound), http.StatusUnauthorized)
+		}
+
 		err = h.service.OrderService.AddNewOrder(orderNumber, userID)
 		if err != nil {
 			switch {
@@ -49,7 +53,10 @@ func (h *Handler) OrderCreate() http.HandlerFunc {
 func (h *Handler) OrdersGet() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const HandlerName = "OrdersGet"
-		userID := r.Context().Value(constants.UserIDKey).(uint)
+		userID, ok := r.Context().Value(constants.UserIDKey).(uint)
+		if !ok {
+			http.Error(w, utils.ErrorAsJSON(customErrors.ErrUserNotFound), http.StatusUnauthorized)
+		}
 
 		orders, err := h.service.OrderService.GetAllOrders(userID)
 		if err != nil {

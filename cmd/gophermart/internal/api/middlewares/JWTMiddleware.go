@@ -3,6 +3,7 @@ package middlewares
 import (
 	"context"
 	"fmt"
+	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/constants"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/service"
 	"net/http"
 )
@@ -30,7 +31,7 @@ func JWTMiddleware(service *service.Service) func(next http.Handler) http.Handle
 			fmt.Println("---------------------------------------------")
 			fmt.Println("SET USER ID IN CONTEXT:", userID)
 			fmt.Println("---------------------------------------------")
-			ctx := context.WithValue(r.Context(), "UserID", userID)
+			ctx := context.WithValue(r.Context(), constants.UserIDKey, userID)
 
 			next.ServeHTTP(w, r.WithContext(ctx))
 		})
