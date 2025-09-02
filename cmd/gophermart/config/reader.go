@@ -109,6 +109,7 @@ func DefaultConfigBuilder() *Config {
 		},
 		JWT: JWT{
 			Secret: "secret",
+			Expire: 3,
 		},
 	}
 }
