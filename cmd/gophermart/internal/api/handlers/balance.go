@@ -19,6 +19,7 @@ func (h *Handler) GetUserBalance() http.HandlerFunc {
 			http.Error(w, utils.ErrorAsJSON(CustomErrors.ErrUserNotFound), http.StatusUnauthorized)
 		}
 		user, err := h.service.UserService.GetUserBalance(userID)
+		h.logger.Info(fmt.Sprintf("USER: %v", user))
 		if err != nil {
 			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 			return
