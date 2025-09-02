@@ -98,3 +98,20 @@ func (u AccrualResponse) MarshalJSON() (data []byte, err error) {
 	}
 	return json.Marshal(aliasValue)
 }
+
+func (u *AccrualResponse) UnmarshalJSON(bytes []byte) error {
+	type tmp struct {
+		Status  constants.OrderStatus `json:"status"`
+		Accrual float64               `json:"accrual"`
+		Order   string                `json:"order"`
+	}
+	var t tmp
+	err := json.Unmarshal(bytes, &t)
+	if err != nil {
+		return err
+	}
+	u.Status = t.Status
+	u.Order = t.Order
+	u.Accrual = utils.NewMoneyFromFloat(t.Accrual)
+	return nil
+}
