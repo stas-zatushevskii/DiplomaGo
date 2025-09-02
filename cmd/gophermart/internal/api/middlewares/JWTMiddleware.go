@@ -2,6 +2,7 @@ package middlewares
 
 import (
 	"context"
+	"fmt"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/constants"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/service"
 	"net/http"
@@ -13,11 +14,17 @@ func JWTMiddleware(service *service.Service) func(next http.Handler) http.Handle
 			cookie, err := r.Cookie("JWT")
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusUnauthorized)
+				fmt.Println("---------------------------------------------")
+				fmt.Println("COOKIE NOT FOUND")
+				fmt.Println("---------------------------------------------")
 				return
 			}
 			userID, err := service.UserService.GetUserIDFromJwt(cookie.Value)
 			if err != nil {
 				http.Error(w, err.Error(), http.StatusUnauthorized)
+				fmt.Println("---------------------------------------------")
+				fmt.Println("BAD COOKIE")
+				fmt.Println("---------------------------------------------")
 				return
 			}
 

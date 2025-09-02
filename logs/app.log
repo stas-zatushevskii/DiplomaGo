@@ -559,3 +559,32 @@
 {"level":"info","timestamp":"2025-09-02 10:17:50","msg":"shutdown: server closed"}
 {"level":"info","timestamp":"2025-09-02 10:17:50","msg":"shutdown: database closed"}
 {"level":"warn","timestamp":"2025-09-02 10:17:50","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-02 10:21:17","msg":"host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable"}
+{"level":"info","timestamp":"2025-09-02 10:21:17","msg":"postgres://postgres:123@localhost:5432/postgres"}
+{"level":"info","timestamp":"2025-09-02 10:21:17","msg":"&{App:{DebugStatus:true NumberOfWorkers:10} Server:{Address:127.0.0.1:8080} Database:{ConnPath:postgres://postgres:123@localhost:5432/postgres Dsn:host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable} JWT:{Secret:ABOBA Expire:3} Accrual:{Address:}}"}
+{"level":"info","timestamp":"2025-09-02 10:21:17","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-02 10:21:17","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-02 10:21:17","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-02 10:22:34","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":400,"duration":0.001139083,"size":36}
+{"level":"info","timestamp":"2025-09-02 10:22:42","msg":"Handled HTTP request","uri":"/api/user/orders","method":"GET","status":200,"duration":0.002693167,"size":26}
+{"level":"info","timestamp":"2025-09-02 10:23:35","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":400,"duration":0.002759083,"size":36}
+{"level":"warn","timestamp":"2025-09-02 10:25:13","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-02 10:25:13","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-02 10:25:13","msg":"order loader stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-02 10:25:13","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-02 10:25:13","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-02 10:25:13","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-02 10:25:16","msg":"host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable"}
+{"level":"info","timestamp":"2025-09-02 10:25:16","msg":"postgres://postgres:123@localhost:5432/postgres"}
+{"level":"info","timestamp":"2025-09-02 10:25:16","msg":"&{App:{DebugStatus:true NumberOfWorkers:10} Server:{Address:127.0.0.1:8080} Database:{ConnPath:postgres://postgres:123@localhost:5432/postgres Dsn:host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable} JWT:{Secret:ABOBA Expire:3} Accrual:{Address:}}"}
+{"level":"info","timestamp":"2025-09-02 10:25:16","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-02 10:25:16","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-02 10:25:16","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-02 10:25:18","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":400,"duration":0.001184084,"size":36}
+{"level":"info","timestamp":"2025-09-02 10:25:57","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":202,"duration":0.015286875,"size":23}
+{"level":"warn","timestamp":"2025-09-02 10:30:00","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-02 10:30:00","msg":"order loader stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-02 10:30:00","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-02 10:30:00","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-02 10:30:00","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-02 10:30:00","msg":"ENDED Graceful Shutdown"}

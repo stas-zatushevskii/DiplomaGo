@@ -68,6 +68,7 @@ func (h *Handler) Register() http.HandlerFunc {
 			return
 		}
 		jwt, err := h.service.UserService.BuildJwt(login.UserID)
+		h.logger.Info(fmt.Sprintf("USER ID IN JWT %d", login.UserID))
 		if err != nil {
 			http.Error(w, utils.ErrorAsJSON(err), http.StatusInternalServerError)
 			return
