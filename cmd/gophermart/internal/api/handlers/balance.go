@@ -31,6 +31,7 @@ func (h *Handler) GetUserBalance() http.HandlerFunc {
 		}
 		w.WriteHeader(http.StatusOK)
 		w.Write(response)
+		h.logger.Info(fmt.Sprintf("RESPONSE: %s", response))
 	}
 }
 
