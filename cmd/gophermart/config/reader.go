@@ -98,14 +98,14 @@ func DefaultConfigBuilder() *Config {
 			Dsn:      "host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable",
 		},
 		Accrual: Accrual{
-			Address: "localhost:8080",
+			Address: "localhost:8081",
 		},
 		App: AppConfig{
 			DebugStatus:     true,
 			NumberOfWorkers: 10,
 		},
 		Server: Server{
-			Address: "localhost:8081",
+			Address: "localhost:8080",
 		},
 		JWT: JWT{
 			Secret: "secret",
