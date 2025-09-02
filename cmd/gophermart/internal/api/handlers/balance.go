@@ -99,7 +99,7 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 			h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
 			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		}
-		err = h.service.OrderService.WithdrawVersion2(requestData.Withdrawn, requestData.Order, userBalance)
+		err = h.service.OrderService.WithdrawVersion2(userID, requestData.Withdrawn, requestData.Order, userBalance)
 		if err != nil {
 			switch {
 			case errors.Is(err, CustomErrors.ErrOrdersNotFound):

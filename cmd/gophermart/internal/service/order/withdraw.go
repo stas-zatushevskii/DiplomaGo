@@ -27,7 +27,7 @@ func (o *ServiceOrder) Withdraw(withdrawn float64, orderNumber string) error {
 	return nil
 }
 
-func (o *ServiceOrder) WithdrawVersion2(withdrawn float64, orderNumber string, userBalance *models.UserBalance) error {
+func (o *ServiceOrder) WithdrawVersion2(userID uint, withdrawn float64, orderNumber string, userBalance *models.UserBalance) error {
 	order, err := o.database.GetOrderByOrderNumber(orderNumber)
 	if err != nil {
 		return fmt.Errorf("failed to get order by order number: %w", err)
@@ -40,7 +40,7 @@ func (o *ServiceOrder) WithdrawVersion2(withdrawn float64, orderNumber string, u
 		return customErrors.ErrNotEnoughBalance
 	}
 	o.logger.Warn(fmt.Sprintf("BALANCE TO WITHDRAW : %v", formatedWithdrawn))
-	err = o.database.DecreaseOrderAccrualVersion2(orderNumber, formatedWithdrawn)
+	err = o.database.DecreaseUserBalance(userID, formatedWithdrawn)
 	if err != nil {
 		return fmt.Errorf("error when decreasing order accrual: %w", err)
 	}
