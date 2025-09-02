@@ -37,7 +37,7 @@ func (h *Handler) GetUserBalance() http.HandlerFunc {
 
 type withdrawBalanceData struct {
 	Order     string  `json:"order" validate:"required"`
-	Withdrawn float64 `json:"withdrawn" validate:"required"`
+	Withdrawn float64 `json:"sum" validate:"required"`
 }
 
 func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
@@ -68,6 +68,14 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 			http.Error(w, utils.ErrorAsJSON(err), http.StatusBadRequest)
 			return
 		}
+
+		// Validate by tags
+		err = h.validator.Struct(requestData)
+		if err != nil {
+			http.Error(w, utils.ErrorAsJSON(err), http.StatusBadRequest)
+			return
+		}
+
 		err = h.service.OrderService.AddNewSingleOrder(requestData.Order, userID) // adding new order in database with status Processed
 		if err != nil {
 			switch {
