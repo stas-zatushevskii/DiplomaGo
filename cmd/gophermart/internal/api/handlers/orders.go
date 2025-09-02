@@ -23,7 +23,7 @@ func (h *Handler) OrderCreate() http.HandlerFunc {
 		r.Body.Close()
 
 		orderNumber := string(body)
-		userID := r.Context().Value(constants.UserIDKey).(uint)
+		userID := r.Context().Value("UserID").(uint)
 		err = h.service.OrderService.AddNewOrder(orderNumber, userID)
 		if err != nil {
 			switch {
