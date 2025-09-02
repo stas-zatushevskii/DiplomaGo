@@ -29,13 +29,10 @@ type ProcessOderData struct {
 }
 
 func (u UserBalance) MarshalJSON() (data []byte, err error) {
-	type aliasData UserBalance
 	aliasValue := struct {
-		aliasData
 		Accrual          float64 `json:"current"`
 		WithdrawnAccrual float64 `json:"withdrawn"`
 	}{
-		aliasData:        aliasData(u),
 		Accrual:          utils.Money.ToFloat(u.Accrual),
 		WithdrawnAccrual: utils.Money.ToFloat(u.WithdrawnAccrual),
 	}
