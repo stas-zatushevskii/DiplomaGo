@@ -71,20 +71,21 @@ func (cfg *Config) parseFlags(logger *zap.Logger) error {
 		}
 		cfg.Database.ConnPath = connPathFlag
 		cfg.Database.Dsn = dsn
-		logger.Info("Database connection URL", zap.String("url", dsn))
-		logger.Info("Database connection DSN", zap.String("dsn", dsn))
 	}
 	return nil
 }
 
 func (cfg *Config) parseVirtualEnvironment(logger *zap.Logger) {
 	if envRunAddr := os.Getenv("RUN_ADDRESS"); envRunAddr != "" {
+		logger.Info("RUN_ADDRESS", zap.String("address", envRunAddr))
 		cfg.Server.Address = envRunAddr
 	}
 	if envConnPath := os.Getenv("DATABASE_URI"); envConnPath != "" {
+		logger.Info("DATABASE_URI", zap.String("path", envConnPath))
 		cfg.Database.ConnPath = envConnPath
 	}
 	if envAccrualAddr := os.Getenv("ACCRUAL_SYSTEM_ADDRESS"); envAccrualAddr != "" {
+		logger.Info("ACCRUAL_SYSTEM_ADDRESS", zap.String("address", envAccrualAddr))
 		cfg.Accrual.Address = envAccrualAddr
 	}
 }
