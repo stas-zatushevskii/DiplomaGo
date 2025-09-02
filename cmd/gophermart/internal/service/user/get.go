@@ -26,3 +26,13 @@ func (u *ServiceUser) GetUserBalance(userID uint) (*models.UserBalance, error) {
 
 	return &models.UserBalance{Accrual: accrual, WithdrawnAccrual: withdrawnAccrual}, nil
 }
+
+// TODO new version
+
+func (u *ServiceUser) GetUserBalanceVersion2(userID uint) (*models.UserBalance, error) {
+	user, err := u.database.GetUserByID(userID)
+	if err != nil {
+		return nil, err
+	}
+	return &models.UserBalance{Accrual: user.CurrentBalance, WithdrawnAccrual: user.WithdrawnBalance}, nil
+}

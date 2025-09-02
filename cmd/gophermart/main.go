@@ -8,6 +8,7 @@ import (
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/api"
 	db "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/database"
 	CustomErrors "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/errors"
+	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/models"
 	srv "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/service"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/utils"
 	log "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/logger"
@@ -47,7 +48,7 @@ func main() {
 
 	service := srv.NewService(config, logger, database)
 
-	orderChan := make(chan string, config.App.NumberOfWorkers)
+	orderChan := make(chan models.ProcessOderData, config.App.NumberOfWorkers)
 	semaphore := utils.NewSemaphore(config.App.NumberOfWorkers, logger)
 	go service.OrderService.OrderListener(ctx, orderChan, semaphore)
 	go service.OrderService.OrderLoader(ctx, orderChan)

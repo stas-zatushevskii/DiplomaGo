@@ -3,9 +3,10 @@ package order
 import (
 	"fmt"
 	customErr "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/errors"
+	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/models"
 )
 
-func (o *ServiceOrder) AddNewOrder(orderNumber string, userID uint, orderChan chan<- string) error {
+func (o *ServiceOrder) AddNewOrder(orderNumber string, userID uint, orderChan chan<- models.ProcessOderData) error {
 	ok := CheckLuhna(orderNumber)
 	if !ok {
 		return customErr.ErrOrderInvalid
@@ -14,7 +15,7 @@ func (o *ServiceOrder) AddNewOrder(orderNumber string, userID uint, orderChan ch
 
 	if err == nil {
 		go func() {
-			orderChan <- orderNumber
+			orderChan <- models.ProcessOderData{UserID: userID, OrderNumber: orderNumber}
 		}()
 	}
 	return err

@@ -86,12 +86,12 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 				return
 			}
 		}
-		userBalance, err := h.service.UserService.GetUserBalance(userID)
+		userBalance, err := h.service.UserService.GetUserBalanceVersion2(userID)
 		if err != nil {
 			h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
 			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		}
-		err = h.service.OrderService.WithdrawVersion2(requestData.Withdrawn, requestData.Order, userBalance.Accrual)
+		err = h.service.OrderService.WithdrawVersion2(requestData.Withdrawn, requestData.Order, userBalance)
 		if err != nil {
 			switch {
 			case errors.Is(err, CustomErrors.ErrOrdersNotFound):

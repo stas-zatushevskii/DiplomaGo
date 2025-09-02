@@ -57,6 +57,31 @@ func (d *Database) IncreaseOrderAccrual(orderNumber string, accrual utils.Money)
 	return nil
 }
 
+// TODO new logic here
+
+func (d *Database) IncreaseUserBalance(userID uint, accrual utils.Money) error {
+	res := d.GormDB.Model(&models.User{}).
+		Where("user_id = ?", userID).
+		UpdateColumn("current_balance", gorm.Expr("current_balance + ?", accrual))
+	if res.RowsAffected == 0 {
+		return customErrors.ErrUserNotFound
+	}
+	return res.Error
+}
+
+func (d *Database) DecreaseUserBalance(userID uint, withdrawn utils.Money) error {
+	res := d.GormDB.Model(&models.User{}).
+		Where("user_id = ?", userID).
+		UpdateColumn("current_balance", gorm.Expr("current_balance - ?", withdrawn)).
+		UpdateColumn("withdrawn_balance", gorm.Expr("withdrawn_balance + ?", withdrawn))
+	if res.RowsAffected == 0 {
+		return customErrors.ErrUserNotFound
+	}
+	return res.Error
+}
+
+// TODO end new logic
+
 func (d *Database) DecreaseOrderAccrual(orderNumber string, withdraw utils.Money) error {
 	res := d.GormDB.Model(&models.Order{}).
 		Where("order_number = ?", orderNumber).

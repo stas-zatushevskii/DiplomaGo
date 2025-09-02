@@ -872,3 +872,35 @@
 {"level":"info","timestamp":"2025-09-02 13:25:16","msg":"shutdown: server closed"}
 {"level":"info","timestamp":"2025-09-02 13:25:16","msg":"shutdown: database closed"}
 {"level":"warn","timestamp":"2025-09-02 13:25:16","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-02 17:38:59","msg":"dsn","dsn":"host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable"}
+{"level":"info","timestamp":"2025-09-02 17:38:59","msg":"db_url","url":"postgres://postgres:123@localhost:5432/postgres"}
+{"level":"info","timestamp":"2025-09-02 17:38:59","msg":"accrual_addr","addr":"localhost:8081"}
+{"level":"info","timestamp":"2025-09-02 17:38:59","msg":"&{App:{DebugStatus:true NumberOfWorkers:10} Server:{Address:127.0.0.1:8080} Database:{ConnPath:postgres://postgres:123@localhost:5432/postgres Dsn:host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable} JWT:{Secret:ABOBA Expire:3} Accrual:{Address:localhost:8081}}"}
+{"level":"info","timestamp":"2025-09-02 17:38:59","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-02 17:38:59","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-02 17:38:59","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-02 17:38:59","msg":"processing order from database 6853253"}
+{"level":"warn","timestamp":"2025-09-02 17:38:59","msg":"localhost:8081/api/orders/6853253"}
+{"level":"error","timestamp":"2025-09-02 17:38:59","msg":"process order failed","error":"Get \"localhost:8081/api/orders/6853253\": unsupported protocol scheme \"localhost\""}
+{"level":"warn","timestamp":"2025-09-02 17:39:03","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-02 17:39:03","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-02 17:39:03","msg":"order loader stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-02 17:39:03","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-02 17:39:03","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-02 17:39:03","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-02 21:52:47","msg":"dsn","dsn":"host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable"}
+{"level":"info","timestamp":"2025-09-02 21:52:47","msg":"db_url","url":"postgres://postgres:123@localhost:5432/postgres"}
+{"level":"info","timestamp":"2025-09-02 21:52:47","msg":"accrual_addr","addr":"localhost:8081"}
+{"level":"info","timestamp":"2025-09-02 21:52:47","msg":"&{App:{DebugStatus:true NumberOfWorkers:10} Server:{Address:127.0.0.1:8080} Database:{ConnPath:postgres://postgres:123@localhost:5432/postgres Dsn:host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable} JWT:{Secret:ABOBA Expire:3} Accrual:{Address:localhost:8081}}"}
+{"level":"info","timestamp":"2025-09-02 21:52:47","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-02 21:52:47","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-02 21:52:47","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-02 21:52:47","msg":"processing order from database 6853253"}
+{"level":"warn","timestamp":"2025-09-02 21:52:47","msg":"localhost:8081/api/orders/6853253"}
+{"level":"error","timestamp":"2025-09-02 21:52:47","msg":"process order failed","error":"Get \"localhost:8081/api/orders/6853253\": unsupported protocol scheme \"localhost\""}
+{"level":"warn","timestamp":"2025-09-02 21:52:50","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-02 21:52:50","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-02 21:52:50","msg":"order loader stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-02 21:52:50","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-02 21:52:50","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-02 21:52:50","msg":"ENDED Graceful Shutdown"}

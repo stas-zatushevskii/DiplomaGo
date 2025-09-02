@@ -8,15 +8,24 @@ import (
 )
 
 type User struct {
-	gorm.Model     `json:"-"`
-	Username       string `gorm:"unique" json:"-"`
-	HashedPassword string `json:"-"`
-	Orders         []Order
+	gorm.Model       `json:"-"`
+	Username         string      `gorm:"unique" json:"-"`
+	HashedPassword   string      `json:"-"`
+	CurrentBalance   utils.Money `json:"Current"`
+	WithdrawnBalance utils.Money `json:"Withdrawn"`
+	Orders           []Order
 }
+
+// FIXME UserBalance - old version
 
 type UserBalance struct {
 	Accrual          utils.Money `json:"Current"`
 	WithdrawnAccrual utils.Money `json:"Withdrawn"`
+}
+
+type ProcessOderData struct {
+	UserID      uint   `json:"user_id"`
+	OrderNumber string `json:"order_number"`
 }
 
 func (u UserBalance) MarshalJSON() (data []byte, err error) {
