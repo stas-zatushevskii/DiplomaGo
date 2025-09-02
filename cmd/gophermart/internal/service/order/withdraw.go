@@ -33,7 +33,7 @@ func (o *ServiceOrder) WithdrawVersion2(withdrawn float64, orderNumber string, u
 		return fmt.Errorf("failed to get order by order number: %w", err)
 	}
 	formatedWithdrawn := utils.NewMoneyFromFloat(withdrawn)
-	if userBalance.Accrual >= formatedWithdrawn {
+	if userBalance.Accrual <= formatedWithdrawn {
 		fmt.Println("----------------------------------------------")
 		fmt.Println("Withdrawn:", formatedWithdrawn, "userBalance:", userBalance.Accrual)
 		fmt.Println("----------------------------------------------")
