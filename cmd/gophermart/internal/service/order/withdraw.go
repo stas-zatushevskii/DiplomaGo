@@ -34,6 +34,9 @@ func (o *ServiceOrder) WithdrawVersion2(withdrawn float64, orderNumber string, u
 	}
 	formatedWithdrawn := utils.NewMoneyFromFloat(withdrawn)
 	if userBalance.Accrual >= formatedWithdrawn {
+		fmt.Println("----------------------------------------------")
+		fmt.Println("Withdrawn:", formatedWithdrawn, "userBalance:", userBalance.Accrual)
+		fmt.Println("----------------------------------------------")
 		return customErrors.ErrNotEnoughBalance
 	}
 	o.logger.Warn(fmt.Sprintf("BALANCE TO WITHDRAW : %v", formatedWithdrawn))
