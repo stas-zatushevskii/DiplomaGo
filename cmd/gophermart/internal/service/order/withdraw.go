@@ -33,9 +33,10 @@ func (o *ServiceOrder) WithdrawVersion2(withdrawn float64, orderNumber string, u
 		return fmt.Errorf("failed to get order by order number: %w", err)
 	}
 	formatedWithdrawn := utils.NewMoneyFromFloat(withdrawn)
-	if userBalance.Accrual <= formatedWithdrawn {
+	if userBalance.Accrual >= formatedWithdrawn {
 		return customErrors.ErrNotEnoughBalance
 	}
+	o.logger.Warn(fmt.Sprintf("BALANCE TO WITHDRAW : %v", formatedWithdrawn))
 	err = o.database.DecreaseOrderAccrualVersion2(orderNumber, formatedWithdrawn)
 	if err != nil {
 		return fmt.Errorf("error when decreasing order accrual: %w", err)
