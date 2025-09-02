@@ -12,7 +12,7 @@ import (
 )
 
 type UserRequest struct {
-	Username string `json:"username" validate:"required,alphanum"`
+	Username string `json:"login" validate:"required,alphanum"`
 	Password string `json:"password" validate:"required,alphanum"`
 }
 

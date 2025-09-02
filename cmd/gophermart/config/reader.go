@@ -127,6 +127,7 @@ func (c *NewConfig) ParseConfigFromFile(path string) error {
 	return nil
 }
 
+// LoadConfig loading config data from: file, flags, env
 func LoadConfig(log *zap.Logger) (*Config, error) {
 	nc := &NewConfig{log: log, config: new(Config)}
 
