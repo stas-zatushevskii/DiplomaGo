@@ -19,8 +19,8 @@ type User struct {
 // FIXME UserBalance - old version
 
 type UserBalance struct {
-	Accrual          utils.Money `json:"Current"`
-	WithdrawnAccrual utils.Money `json:"Withdrawn"`
+	Accrual          utils.Money `json:"current"`
+	WithdrawnAccrual utils.Money `json:"withdrawn"`
 }
 
 type ProcessOderData struct {
