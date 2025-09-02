@@ -10,7 +10,7 @@ import (
 func (o *ServiceOrder) Withdraw(withdrawn float64, orderNumber string) error {
 	order, err := o.database.GetOrderByOrderNumber(orderNumber)
 	if err != nil {
-		return fmt.Errorf("failed to get order by order number: %v", err)
+		return fmt.Errorf("failed to get order by order number: %w", err)
 	}
 	formatedWithdrawn := utils.NewMoneyFromFloat(withdrawn)
 	if order.Accrual <= formatedWithdrawn {
@@ -18,11 +18,11 @@ func (o *ServiceOrder) Withdraw(withdrawn float64, orderNumber string) error {
 	}
 	err = o.database.DecreaseOrderAccrual(orderNumber, formatedWithdrawn)
 	if err != nil {
-		return fmt.Errorf("error when decreasing order accrual: %v", err)
+		return fmt.Errorf("error when decreasing order accrual: %w", err)
 	}
 	err = o.database.AddToOrderHistory(order, formatedWithdrawn)
 	if err != nil {
-		return fmt.Errorf("failed to add to order history: %v", err)
+		return fmt.Errorf("failed to add to order history: %w", err)
 	}
 	return nil
 }
