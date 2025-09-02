@@ -756,3 +756,47 @@
 {"level":"info","timestamp":"2025-09-02 11:02:45","msg":"shutdown: server closed"}
 {"level":"info","timestamp":"2025-09-02 11:02:45","msg":"shutdown: database closed"}
 {"level":"warn","timestamp":"2025-09-02 11:02:45","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-02 11:19:12","msg":"dsn","dsn":"host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable"}
+{"level":"info","timestamp":"2025-09-02 11:19:12","msg":"db_url","url":"postgres://postgres:123@localhost:5432/postgres"}
+{"level":"info","timestamp":"2025-09-02 11:19:12","msg":"accrual_addr","addr":"localhost:8081"}
+{"level":"info","timestamp":"2025-09-02 11:19:12","msg":"&{App:{DebugStatus:true NumberOfWorkers:10} Server:{Address:127.0.0.1:8080} Database:{ConnPath:postgres://postgres:123@localhost:5432/postgres Dsn:host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable} JWT:{Secret:ABOBA Expire:3} Accrual:{Address:localhost:8081}}"}
+{"level":"info","timestamp":"2025-09-02 11:19:12","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-02 11:19:12","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-02 11:19:12","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-02 11:19:12","msg":"processing order from database 6853253"}
+{"level":"error","timestamp":"2025-09-02 11:19:12","msg":"process order failed","error":"Get \"http://localhost:8081/api/orders/6853253\": dial tcp [::1]:8081: connect: connection refused"}
+{"level":"info","timestamp":"2025-09-02 11:19:46","msg":"Handled HTTP request","uri":"/api/orders/6853253","method":"POST","status":404,"duration":0.001104125,"size":43}
+{"level":"info","timestamp":"2025-09-02 11:20:16","msg":"Handled HTTP request","uri":"/api/user/orders/","method":"POST","status":404,"duration":0.000270083,"size":43}
+{"level":"info","timestamp":"2025-09-02 11:20:38","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":401,"duration":0.008106833,"size":55}
+{"level":"info","timestamp":"2025-09-02 11:22:21","msg":"Failed to get user","error":"user not found"}
+{"level":"info","timestamp":"2025-09-02 11:22:21","msg":"Handled HTTP request","uri":"/api/user/login","method":"POST","status":404,"duration":0.007683625,"size":51}
+{"level":"info","timestamp":"2025-09-02 11:22:32","msg":"Failed to get user","error":"user not found"}
+{"level":"info","timestamp":"2025-09-02 11:22:32","msg":"Handled HTTP request","uri":"/api/user/login","method":"POST","status":404,"duration":0.003105625,"size":51}
+{"level":"info","timestamp":"2025-09-02 11:22:35","msg":"Failed to get user","error":"user not found"}
+{"level":"info","timestamp":"2025-09-02 11:22:35","msg":"Handled HTTP request","uri":"/api/user/login","method":"POST","status":404,"duration":0.001342667,"size":51}
+{"level":"info","timestamp":"2025-09-02 11:22:48","msg":"USER ID IN JWT 2"}
+{"level":"info","timestamp":"2025-09-02 11:22:48","msg":"Handled HTTP request","uri":"/api/user/register","method":"POST","status":200,"duration":0.2996725,"size":23}
+{"level":"info","timestamp":"2025-09-02 11:23:13","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":422,"duration":0.000823208,"size":50}
+{"level":"info","timestamp":"2025-09-02 11:23:50","msg":"order loader stopped","error":"context canceled"}
+{"level":"warn","timestamp":"2025-09-02 11:23:50","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-02 11:23:50","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-02 11:23:50","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-02 11:23:50","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-02 11:23:50","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-02 11:23:52","msg":"dsn","dsn":"host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable"}
+{"level":"info","timestamp":"2025-09-02 11:23:52","msg":"db_url","url":"postgres://postgres:123@localhost:5432/postgres"}
+{"level":"info","timestamp":"2025-09-02 11:23:52","msg":"accrual_addr","addr":"localhost:8081"}
+{"level":"info","timestamp":"2025-09-02 11:23:52","msg":"&{App:{DebugStatus:true NumberOfWorkers:10} Server:{Address:127.0.0.1:8080} Database:{ConnPath:postgres://postgres:123@localhost:5432/postgres Dsn:host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable} JWT:{Secret:ABOBA Expire:3} Accrual:{Address:localhost:8081}}"}
+{"level":"info","timestamp":"2025-09-02 11:23:52","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-02 11:23:52","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-02 11:23:52","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-02 11:23:52","msg":"processing order from database 6853253"}
+{"level":"error","timestamp":"2025-09-02 11:23:52","msg":"process order failed","error":"Get \"http://localhost:8081/api/orders/6853253\": dial tcp [::1]:8081: connect: connection refused"}
+{"level":"info","timestamp":"2025-09-02 11:23:55","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":422,"duration":0.00105675,"size":50}
+{"level":"info","timestamp":"2025-09-02 11:23:56","msg":"Handled HTTP request","uri":"/api/user/orders","method":"POST","status":422,"duration":0.000490708,"size":50}
+{"level":"info","timestamp":"2025-09-02 11:29:00","msg":"order loader stopped","error":"context canceled"}
+{"level":"warn","timestamp":"2025-09-02 11:29:00","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-02 11:29:00","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-02 11:29:00","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-02 11:29:00","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-02 11:29:00","msg":"ENDED Graceful Shutdown"}

@@ -28,6 +28,9 @@ func JWTMiddleware(service *service.Service) func(next http.Handler) http.Handle
 				return
 			}
 
+			fmt.Println("---------------------------------------------")
+			fmt.Println("SET USER ID IN CONTEXT:", userID)
+			fmt.Println("---------------------------------------------")
 			ctx := context.WithValue(r.Context(), constants.UserIDKey, userID)
 
 			next.ServeHTTP(w, r.WithContext(ctx))
