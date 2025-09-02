@@ -42,7 +42,7 @@ func ConvertPostgresURLToDSN(urlStr string) (string, error) {
 	return dsn, nil
 }
 
-func (cfg *Config) parseFlags(logger *zap.Logger) error {
+func (cfg *Config) parseFlags() error {
 	var (
 		connPathFlag   string
 		accrualAddrFlg string
@@ -56,12 +56,10 @@ func (cfg *Config) parseFlags(logger *zap.Logger) error {
 
 	if serverAddrFlg != "" {
 		cfg.Server.Address = serverAddrFlg
-		logger.Info("Server address", zap.String("address", cfg.Server.Address))
 	}
 
 	if accrualAddrFlg != "" {
 		cfg.Accrual.Address = accrualAddrFlg
-		logger.Info("Accrual address", zap.String("address", cfg.Accrual.Address))
 	}
 
 	if connPathFlag != "" {
@@ -75,19 +73,22 @@ func (cfg *Config) parseFlags(logger *zap.Logger) error {
 	return nil
 }
 
-func (cfg *Config) parseVirtualEnvironment(logger *zap.Logger) {
+func (cfg *Config) parseVirtualEnvironment() error {
 	if envRunAddr := os.Getenv("RUN_ADDRESS"); envRunAddr != "" {
-		logger.Info("RUN_ADDRESS", zap.String("address", envRunAddr))
 		cfg.Server.Address = envRunAddr
 	}
 	if envConnPath := os.Getenv("DATABASE_URI"); envConnPath != "" {
-		logger.Info("DATABASE_URI", zap.String("path", envConnPath))
+		dsn, err := ConvertPostgresURLToDSN(envConnPath)
+		if err != nil {
+			return fmt.Errorf("invalid DATABASE_URI: %w", err)
+		}
 		cfg.Database.ConnPath = envConnPath
+		cfg.Database.Dsn = dsn
 	}
 	if envAccrualAddr := os.Getenv("ACCRUAL_SYSTEM_ADDRESS"); envAccrualAddr != "" {
-		logger.Info("ACCRUAL_SYSTEM_ADDRESS", zap.String("address", envAccrualAddr))
 		cfg.Accrual.Address = envAccrualAddr
 	}
+	return nil
 }
 
 func DefaultConfigBuilder() *Config {
@@ -133,10 +134,12 @@ func LoadConfig(log *zap.Logger) (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
-	if err = nc.config.parseFlags(log); err != nil {
+	if err = nc.config.parseFlags(); err != nil {
 		return nil, err
 	}
-	nc.config.parseVirtualEnvironment(log)
+	if err = nc.config.parseVirtualEnvironment(); err != nil {
+		return nil, err
+	}
 
 	log.Info(nc.config.Database.Dsn)
 	log.Info(nc.config.Database.ConnPath)
