@@ -80,59 +80,6 @@ func (d *Database) DecreaseUserBalance(userID uint, withdrawn utils.Money) error
 	return res.Error
 }
 
-// TODO end new logic
-
-func (d *Database) DecreaseOrderAccrual(orderNumber string, withdraw utils.Money) error {
-	res := d.GormDB.Model(&models.Order{}).
-		Where("order_number = ?", orderNumber).
-		UpdateColumn("accrual", gorm.Expr("accrual - ?", withdraw)).
-		UpdateColumn("withdrawn_accrual", gorm.Expr("withdrawn_accrual + ?", withdraw))
-
-	return res.Error
-}
-
-func (d *Database) DecreaseOrderAccrualVersion2(orderNumber string, withdraw utils.Money) error {
-	res := d.GormDB.Model(&models.Order{}).
-		Where("order_number = ?", orderNumber).
-		UpdateColumn("withdrawn_accrual", gorm.Expr("withdrawn_accrual + ?", withdraw))
-
-	return res.Error
-}
-
-func (d *Database) GetUserBalance(userID uint) (utils.Money, error) {
-	var balance utils.Money
-
-	res := d.GormDB.Model(&models.Order{}).
-		Select("COALESCE(SUM(accrual), 0)").
-		Where("user_id = ? AND status = ?", userID, constants.OrderStatusProcessed).
-		Scan(&balance)
-
-	if res.Error != nil {
-		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
-			return 0, nil
-		}
-	}
-
-	return balance, res.Error
-}
-
-func (d *Database) GetUserWithDrawnBalance(userID uint) (utils.Money, error) {
-	var balance utils.Money
-
-	res := d.GormDB.Model(&models.Order{}).
-		Select("COALESCE(SUM(withdrawn_accrual), 0)").
-		Where("user_id = ? AND status = ? AND withdrawn_accrual > 0", userID, constants.OrderStatusProcessed).
-		Scan(&balance)
-
-	if res.Error != nil {
-		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
-			return 0, nil
-		}
-	}
-
-	return balance, res.Error
-}
-
 func (d *Database) AddToOrderHistory(order *models.Order, sum utils.Money) error {
 	h := models.OrderHistory{
 		OrderNumber: order.OrderNumber,

@@ -7,40 +7,16 @@ import (
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/utils"
 )
 
-func (o *ServiceOrder) Withdraw(withdrawn float64, orderNumber string) error {
-	order, err := o.database.GetOrderByOrderNumber(orderNumber)
+func (o *ServiceOrder) Withdraw(orderData models.ProcessOderData, withdrawn float64, userBalance utils.Money) error {
+	order, err := o.database.GetOrderByOrderNumber(orderData.OrderNumber)
 	if err != nil {
 		return fmt.Errorf("failed to get order by order number: %w", err)
 	}
 	formatedWithdrawn := utils.NewMoneyFromFloat(withdrawn)
-	if order.Accrual <= formatedWithdrawn {
+	if userBalance <= utils.NewMoneyFromFloat(withdrawn) {
 		return customErrors.ErrNotEnoughBalance
 	}
-	err = o.database.DecreaseOrderAccrual(orderNumber, formatedWithdrawn)
-	if err != nil {
-		return fmt.Errorf("error when decreasing order accrual: %w", err)
-	}
-	err = o.database.AddToOrderHistory(order, formatedWithdrawn)
-	if err != nil {
-		return fmt.Errorf("failed to add to order history: %w", err)
-	}
-	return nil
-}
-
-func (o *ServiceOrder) WithdrawVersion2(userID uint, withdrawn float64, orderNumber string, userBalance *models.UserBalance) error {
-	order, err := o.database.GetOrderByOrderNumber(orderNumber)
-	if err != nil {
-		return fmt.Errorf("failed to get order by order number: %w", err)
-	}
-	formatedWithdrawn := utils.NewMoneyFromFloat(withdrawn)
-	if userBalance.Accrual <= formatedWithdrawn {
-		fmt.Println("----------------------------------------------")
-		fmt.Println("Withdrawn:", formatedWithdrawn, "userBalance:", userBalance.Accrual)
-		fmt.Println("----------------------------------------------")
-		return customErrors.ErrNotEnoughBalance
-	}
-	o.logger.Warn(fmt.Sprintf("BALANCE TO WITHDRAW : %v", formatedWithdrawn))
-	err = o.database.DecreaseUserBalance(userID, formatedWithdrawn)
+	err = o.database.DecreaseUserBalance(orderData.UserID, formatedWithdrawn)
 	if err != nil {
 		return fmt.Errorf("error when decreasing order accrual: %w", err)
 	}

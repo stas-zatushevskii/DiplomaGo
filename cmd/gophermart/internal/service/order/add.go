@@ -21,7 +21,7 @@ func (o *ServiceOrder) AddNewOrder(orderNumber string, userID uint, orderChan ch
 	return err
 }
 
-func (o *ServiceOrder) AddNewSingleOrder(orderNumber string, userID uint) error {
+func (o *ServiceOrder) AddExternalOrder(orderNumber string, userID uint) error {
 	ok := CheckLuhna(orderNumber)
 	if !ok {
 		return customErr.ErrOrderInvalid

@@ -7,6 +7,7 @@ import (
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/api/utils"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/constants"
 	CustomErrors "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/errors"
+	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/models"
 	"io"
 	"net/http"
 )
@@ -18,8 +19,7 @@ func (h *Handler) GetUserBalance() http.HandlerFunc {
 		if !ok {
 			http.Error(w, utils.ErrorAsJSON(CustomErrors.ErrUserNotFound), http.StatusUnauthorized)
 		}
-		user, err := h.service.UserService.GetUserBalanceVersion2(userID)
-		h.logger.Info(fmt.Sprintf("USER: %v", user))
+		user, err := h.service.UserService.GetUserBalance(userID)
 		if err != nil {
 			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 			return
@@ -31,7 +31,6 @@ func (h *Handler) GetUserBalance() http.HandlerFunc {
 		}
 		w.WriteHeader(http.StatusOK)
 		w.Write(response)
-		h.logger.Info(fmt.Sprintf("RESPONSE: %s", response))
 	}
 }
 
@@ -76,7 +75,7 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 			return
 		}
 
-		err = h.service.OrderService.AddNewSingleOrder(requestData.Order, userID) // adding new order in database with status Processed
+		err = h.service.OrderService.AddExternalOrder(requestData.Order, userID) // adding new order in database with status Processed
 		if err != nil {
 			switch {
 			case errors.Is(err, CustomErrors.ErrOrderAlreadyExist):
@@ -94,12 +93,15 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 				return
 			}
 		}
-		userBalance, err := h.service.UserService.GetUserBalanceVersion2(userID)
+		userBalance, err := h.service.UserService.GetUserBalance(userID)
 		if err != nil {
 			h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
 			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		}
-		err = h.service.OrderService.WithdrawVersion2(userID, requestData.Withdrawn, requestData.Order, userBalance)
+		err = h.service.OrderService.Withdraw(
+			models.ProcessOderData{UserID: userID, OrderNumber: requestData.Order},
+			requestData.Withdrawn,
+			userBalance.Accrual)
 		if err != nil {
 			switch {
 			case errors.Is(err, CustomErrors.ErrOrdersNotFound):

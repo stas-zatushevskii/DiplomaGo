@@ -9,8 +9,6 @@ import (
 	"time"
 )
 
-// Todo Change ProcessOrder logic with new methods (IncreaseUserBalance)
-
 var ProcessingOrdersCache = make(map[string]struct{})
 
 func (o *ServiceOrder) ProcessOrder(data models.ProcessOderData) error { // user models.User
@@ -24,22 +22,21 @@ func (o *ServiceOrder) ProcessOrder(data models.ProcessOderData) error { // user
 	}
 	switch accrualResponse.Status {
 	case constants.OrderStatusProcessing:
-		err := o.database.ChangeOrderStatus(data.OrderNumber, constants.OrderStatusProcessing)
+		err = o.database.ChangeOrderStatus(data.OrderNumber, constants.OrderStatusProcessing)
 		if err != nil {
 			return err
 		}
 	case constants.OrderStatusInvalid:
-		err := o.database.ChangeOrderStatus(data.OrderNumber, constants.OrderStatusInvalid)
+		err = o.database.ChangeOrderStatus(data.OrderNumber, constants.OrderStatusInvalid)
 		if err != nil {
 			return err
 		}
 	case constants.OrderStatusProcessed:
-		// o.database.IncreaseUserBalance(user, accrualResponse.Accrual)
 		err = o.database.IncreaseOrderAccrual(data.OrderNumber, accrualResponse.Accrual)
 		if err != nil {
 			return err
 		}
-		err := o.database.IncreaseUserBalance(data.UserID, accrualResponse.Accrual)
+		err = o.database.IncreaseUserBalance(data.UserID, accrualResponse.Accrual)
 		if err != nil {
 			return err
 		}
