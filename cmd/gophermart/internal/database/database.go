@@ -4,11 +4,19 @@ import (
 	"database/sql"
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/config"
+	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/models"
 	"go.uber.org/zap"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+	glog "gorm.io/gorm/logger"
+	"log"
+	"os"
+	"time"
 )
 
 type Database struct {
-	Db     *sql.DB
+	DB     *sql.DB
+	GormDB *gorm.DB
 	logger *zap.Logger
 }
 
@@ -17,16 +25,33 @@ func NewDatabase(logger *zap.Logger, config *config.Config) (*Database, error) {
 	if err != nil {
 		return nil, err
 	}
+	newLogger := glog.New(
+		log.New(os.Stdout, "\r\n", log.LstdFlags),
+		glog.Config{
+			SlowThreshold: time.Second,
+			LogLevel:      glog.Info,
+			Colorful:      true,
+		},
+	)
+	gormDB, err := gorm.Open(postgres.Open(config.Database.Dsn), &gorm.Config{Logger: newLogger})
+	if err != nil {
+		return nil, err
+	}
 	err = db.Ping()
 	if err != nil {
 		return nil, err
 	}
-	return &Database{Db: db, logger: logger}, nil
+	database := &Database{DB: db, GormDB: gormDB, logger: logger}
+	return database, nil
 }
 
 func (d *Database) DatabaseShutdown() {
-	err := d.Db.Close()
+	err := d.DB.Close()
 	if err != nil {
 		d.logger.Fatal("failed to close database", zap.Error(err))
 	}
+}
+
+func SetupDatabase(db *gorm.DB) error {
+	return db.AutoMigrate(&models.User{}, &models.Order{}, &models.OrderHistory{})
 }
