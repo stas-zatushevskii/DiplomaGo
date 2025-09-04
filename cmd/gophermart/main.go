@@ -25,7 +25,6 @@ func main() {
 	logger := log.CreateLogger()
 
 	config, err := cfg.LoadConfig(logger)
-	logger.Info(fmt.Sprintf("%+v", config))
 	if err != nil {
 		logger.Error("failed to load config file", zap.Error(err))
 		if errors.Is(err, customErrors.ErrConfigNotFound) {

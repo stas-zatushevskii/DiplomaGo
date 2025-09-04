@@ -920,3 +920,94 @@
 {"level":"info","timestamp":"2025-09-02 23:17:48","msg":"order loader stopped","error":"context canceled"}
 {"level":"info","timestamp":"2025-09-02 23:17:48","msg":"shutdown: database closed"}
 {"level":"warn","timestamp":"2025-09-02 23:17:48","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-04 12:55:54","msg":"dsn","dsn":"host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable"}
+{"level":"info","timestamp":"2025-09-04 12:55:54","msg":"db_url","url":"postgres://postgres:123@localhost:5432/postgres"}
+{"level":"info","timestamp":"2025-09-04 12:55:54","msg":"accrual_addr","addr":"localhost:8081"}
+{"level":"info","timestamp":"2025-09-04 12:55:54","msg":"&{App:{DebugStatus:true NumberOfWorkers:10} Server:{Address:127.0.0.1:8080} Database:{ConnPath:postgres://postgres:123@localhost:5432/postgres Dsn:host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable} JWT:{Secret:ABOBA Expire:3} Accrual:{Address:localhost:8081}}"}
+{"level":"info","timestamp":"2025-09-04 12:55:55","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-04 12:55:55","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-04 12:55:55","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-04 12:55:55","msg":"processing order from database 6853253"}
+{"level":"warn","timestamp":"2025-09-04 12:55:55","msg":"localhost:8081/api/orders/6853253"}
+{"level":"error","timestamp":"2025-09-04 12:55:55","msg":"process order failed","error":"Get \"localhost:8081/api/orders/6853253\": unsupported protocol scheme \"localhost\""}
+{"level":"info","timestamp":"2025-09-04 12:56:29","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-04 12:56:29","msg":"order loader stopped","error":"context canceled"}
+{"level":"warn","timestamp":"2025-09-04 12:56:29","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-04 12:56:29","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-04 12:56:29","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-04 12:56:29","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-04 12:56:32","msg":"dsn","dsn":"host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable"}
+{"level":"info","timestamp":"2025-09-04 12:56:32","msg":"db_url","url":"postgres://postgres:123@localhost:5432/postgres"}
+{"level":"info","timestamp":"2025-09-04 12:56:32","msg":"accrual_addr","addr":"localhost:8081"}
+{"level":"info","timestamp":"2025-09-04 12:56:32","msg":"&{App:{DebugStatus:true NumberOfWorkers:10} Server:{Address:127.0.0.1:8080} Database:{ConnPath:postgres://postgres:123@localhost:5432/postgres Dsn:host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable} JWT:{Secret:ABOBA Expire:3} Accrual:{Address:localhost:8081}}"}
+{"level":"info","timestamp":"2025-09-04 12:56:32","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-04 12:56:32","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-04 12:56:32","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-04 12:56:32","msg":"processing order from database 6853253"}
+{"level":"warn","timestamp":"2025-09-04 12:56:32","msg":"localhost:8081/api/orders/6853253"}
+{"level":"error","timestamp":"2025-09-04 12:56:32","msg":"process order failed","error":"Get \"localhost:8081/api/orders/6853253\": unsupported protocol scheme \"localhost\""}
+{"level":"info","timestamp":"2025-09-04 12:57:30","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-04 12:57:30","msg":"order loader stopped","error":"context canceled"}
+{"level":"warn","timestamp":"2025-09-04 12:57:30","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-04 12:57:30","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-04 12:57:30","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-04 12:57:30","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-04 12:57:33","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-04 12:57:33","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-04 12:57:33","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-04 12:57:33","msg":"processing order from database 6853253"}
+{"level":"warn","timestamp":"2025-09-04 12:57:33","msg":"localhost:8081/api/orders/6853253"}
+{"level":"error","timestamp":"2025-09-04 12:57:33","msg":"process order failed","error":"Get \"localhost:8081/api/orders/6853253\": unsupported protocol scheme \"localhost\""}
+{"level":"warn","timestamp":"2025-09-04 12:58:23","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-04 12:58:23","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-04 12:58:23","msg":"order loader stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-04 12:58:23","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-04 12:58:23","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-04 12:58:23","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-04 12:58:26","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-04 12:58:26","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-04 12:58:26","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-04 12:58:26","msg":"processing order from database 6853253"}
+{"level":"warn","timestamp":"2025-09-04 12:58:26","msg":"127.0.0.1:8081/api/orders/6853253"}
+{"level":"info","timestamp":"2025-09-04 13:07:22","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-04 13:07:22","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-04 13:07:22","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-04 13:07:22","msg":"processing order from database 6853253"}
+{"level":"warn","timestamp":"2025-09-04 13:07:22","msg":"127.0.0.1:8081/api/orders/6853253"}
+{"level":"info","timestamp":"2025-09-04 13:09:36","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-04 13:09:36","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-04 13:09:36","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-04 13:09:36","msg":"processing order from database 6853253"}
+{"level":"warn","timestamp":"2025-09-04 13:09:36","msg":"127.0.0.1:8081/api/orders/6853253"}
+{"level":"error","timestamp":"2025-09-04 13:09:36","msg":"build request: ","error":"parse \"127.0.0.1:8081/api/orders/6853253\": first path segment in URL cannot contain colon"}
+{"level":"error","timestamp":"2025-09-04 13:09:36","msg":"process order failed","error":"parse \"127.0.0.1:8081/api/orders/6853253\": first path segment in URL cannot contain colon"}
+{"level":"warn","timestamp":"2025-09-04 13:10:09","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-04 13:10:09","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-04 13:10:09","msg":"order loader stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-04 13:10:09","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-04 13:10:09","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-04 13:10:09","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-04 13:10:12","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-04 13:10:12","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-04 13:10:12","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-04 13:10:12","msg":"processing order from database 6853253"}
+{"level":"warn","timestamp":"2025-09-04 13:10:12","msg":"127.0.0.1:8081/api/orders/6853253"}
+{"level":"error","timestamp":"2025-09-04 13:10:12","msg":"process order failed","error":"parse \"127.0.0.1:8081/api/orders/6853253\": first path segment in URL cannot contain colon"}
+{"level":"info","timestamp":"2025-09-04 13:12:17","msg":"order listener stopped","error":"context canceled"}
+{"level":"warn","timestamp":"2025-09-04 13:12:17","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-04 13:12:17","msg":"order loader stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-04 13:12:17","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-04 13:12:17","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-04 13:12:17","msg":"ENDED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-04 13:12:20","msg":"NewSemaphore","numberOfWorkers":10}
+{"level":"info","timestamp":"2025-09-04 13:12:20","msg":"Starting server: ","address":"127.0.0.1:8080"}
+{"level":"info","timestamp":"2025-09-04 13:12:20","msg":"Server started"}
+{"level":"info","timestamp":"2025-09-04 13:12:20","msg":"processing order from database 6853253"}
+{"level":"warn","timestamp":"2025-09-04 13:12:20","msg":"http://127.0.0.1:8081/api/orders/6853253"}
+{"level":"error","timestamp":"2025-09-04 13:12:20","msg":"process order failed","error":"Get \"http://127.0.0.1:8081/api/orders/6853253\": dial tcp 127.0.0.1:8081: connect: connection refused"}
+{"level":"warn","timestamp":"2025-09-04 13:12:30","msg":"STARTED Graceful Shutdown"}
+{"level":"info","timestamp":"2025-09-04 13:12:30","msg":"order loader stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-04 13:12:30","msg":"order listener stopped","error":"context canceled"}
+{"level":"info","timestamp":"2025-09-04 13:12:30","msg":"shutdown: server closed"}
+{"level":"info","timestamp":"2025-09-04 13:12:30","msg":"shutdown: database closed"}
+{"level":"warn","timestamp":"2025-09-04 13:12:30","msg":"ENDED Graceful Shutdown"}
