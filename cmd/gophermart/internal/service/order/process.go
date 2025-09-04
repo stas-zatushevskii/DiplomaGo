@@ -9,11 +9,9 @@ import (
 	"time"
 )
 
-var ProcessingOrdersCache = make(map[string]struct{})
-
 func (o *ServiceOrder) ProcessOrder(data models.ProcessOderData) error { // user models.User
-	ProcessingOrdersCache[data.OrderNumber] = struct{}{}
-	defer delete(ProcessingOrdersCache, data.OrderNumber)
+	o.ProcessingOrdersCache[data.OrderNumber] = struct{}{}
+	defer delete(o.ProcessingOrdersCache, data.OrderNumber)
 
 	// send request with retry
 	accrualResponse, err := o.RequestWithRetry(o, data.OrderNumber)
@@ -75,7 +73,7 @@ func (o *ServiceOrder) loadOrders(ch chan<- models.ProcessOderData) {
 		return
 	}
 	for _, order := range data {
-		_, ok := ProcessingOrdersCache[order.OrderNumber]
+		_, ok := o.ProcessingOrdersCache[order.OrderNumber]
 		if !ok {
 			o.logger.Info("processing order from database " + order.OrderNumber)
 			ch <- models.ProcessOderData{UserID: *order.UserID, OrderNumber: order.OrderNumber}

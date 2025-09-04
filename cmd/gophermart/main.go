@@ -7,7 +7,7 @@ import (
 	cfg "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/config"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/api"
 	db "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/database"
-	CustomErrors "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/errors"
+	customErrors "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/errors"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/models"
 	srv "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/service"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/utils"
@@ -25,10 +25,9 @@ func main() {
 	logger := log.CreateLogger()
 
 	config, err := cfg.LoadConfig(logger)
-	logger.Info(fmt.Sprintf("%+v", config))
 	if err != nil {
 		logger.Error("failed to load config file", zap.Error(err))
-		if errors.Is(err, CustomErrors.ErrConfigNotFound) {
+		if errors.Is(err, customErrors.ErrConfigNotFound) {
 			logger.Warn(fmt.Sprintf("App running on default settings %v", config))
 		} else {
 			return

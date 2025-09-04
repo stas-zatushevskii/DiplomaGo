@@ -8,10 +8,6 @@ import (
 	"go.uber.org/zap"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	glog "gorm.io/gorm/logger"
-	"log"
-	"os"
-	"time"
 )
 
 type Database struct {
@@ -25,15 +21,15 @@ func NewDatabase(logger *zap.Logger, config *config.Config) (*Database, error) {
 	if err != nil {
 		return nil, err
 	}
-	newLogger := glog.New(
-		log.New(os.Stdout, "\r\n", log.LstdFlags),
-		glog.Config{
-			SlowThreshold: time.Second,
-			LogLevel:      glog.Info,
-			Colorful:      true,
-		},
-	)
-	gormDB, err := gorm.Open(postgres.Open(config.Database.Dsn), &gorm.Config{Logger: newLogger})
+	//newLogger := glog.New(
+	//	log.New(os.Stdout, "\r\n", log.LstdFlags),
+	//	glog.Config{
+	//		SlowThreshold: time.Second,
+	//		LogLevel:      glog.Info,
+	//		Colorful:      true,
+	//	},
+	//)
+	gormDB, err := gorm.Open(postgres.Open(config.Database.Dsn))
 	if err != nil {
 		return nil, err
 	}

@@ -98,7 +98,7 @@ func DefaultConfigBuilder() *Config {
 			Dsn:      "host=localhost user=postgres password=123 dbname=postgres port=5432 sslmode=disable",
 		},
 		Accrual: Accrual{
-			Address: "localhost:8081",
+			Address: "http://127.0.0.1:8081",
 		},
 		App: AppConfig{
 			DebugStatus:     true,
@@ -142,10 +142,6 @@ func LoadConfig(log *zap.Logger) (*Config, error) {
 	if err := nc.config.parseFlags(); err != nil {
 		return nil, err
 	}
-
-	log.Info("dsn", zap.String("dsn", nc.config.Database.Dsn))
-	log.Info("db_url", zap.String("url", nc.config.Database.ConnPath))
-	log.Info("accrual_addr", zap.String("addr", nc.config.Accrual.Address))
 
 	return nc.config, nil
 }

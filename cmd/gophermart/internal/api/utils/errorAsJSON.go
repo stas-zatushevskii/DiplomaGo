@@ -7,6 +7,9 @@ type errorResponse struct {
 }
 
 func ErrorAsJSON(err error) string {
+	if err == nil {
+		return ""
+	}
 	resp := errorResponse{Error: err.Error()}
 	response, _ := json.Marshal(resp)
 	return string(response)

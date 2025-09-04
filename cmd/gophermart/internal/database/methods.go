@@ -22,6 +22,8 @@ func (d *Database) CreateNewUser(user *models.User) error {
 	return res.Error
 }
 
+// SELECT * FROM User WHERE id == ?
+
 func (d *Database) GetUserByID(id uint) (*models.User, error) {
 	var user models.User
 	res := d.GormDB.Where("id = ?", id).First(&user)
@@ -38,7 +40,7 @@ func (d *Database) GetUserByUsername(username string) (*models.User, error) {
 	res := d.GormDB.Where("username = ?", username).First(&user)
 	if res.Error != nil {
 		if errors.Is(res.Error, gorm.ErrRecordNotFound) {
-			return nil, customErrors.ErrUserNotFound
+			return nil, customErrors.ErrUserNotFoundByUsername
 		}
 	}
 	return &user, res.Error

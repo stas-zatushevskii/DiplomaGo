@@ -3,6 +3,7 @@ package user
 import (
 	"fmt"
 	"github.com/golang-jwt/jwt/v4"
+	customErrors "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/errors"
 	"time"
 )
 
@@ -23,7 +24,7 @@ func (u *ServiceUser) BuildJwt(userID uint) (string, error) {
 
 	tokenString, err := token.SignedString([]byte(u.config.JWT.Secret))
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("%w: %v", customErrors.ErrJWTBuild, err)
 	}
 
 	return tokenString, nil
