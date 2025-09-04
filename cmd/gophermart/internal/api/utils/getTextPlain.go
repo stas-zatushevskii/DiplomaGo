@@ -15,16 +15,9 @@ func GetTextPlain(r *http.Request, Logger *zap.Logger, HandlerName string) (stri
 		return "", err
 	}
 	defer func() {
-		closeErr := r.Body.Close()
-		if err != nil {
-			if closeErr != nil {
-				Logger.Error(fmt.Sprintf("%s: error closing body", HandlerName), zap.Error(closeErr))
-			}
-			return
+		if err := r.Body.Close(); err != nil {
+			Logger.Error(fmt.Sprintf("%s: error closing body", HandlerName), zap.Error(err))
 		}
-		err = closeErr
-		return
-
 	}()
 
 	orderNumber := string(body)

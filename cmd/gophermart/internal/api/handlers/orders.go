@@ -51,6 +51,5 @@ func (h *Handler) OrdersGet() http.HandlerFunc {
 		}
 		w.WriteHeader(http.StatusOK)
 		w.Write(response)
-		h.logger.Info(fmt.Sprintf("RESPONSE: %s", response))
 	}
 }

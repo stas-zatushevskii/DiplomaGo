@@ -34,19 +34,9 @@ func ProcessBody(data *ValidateData) (response ValidateResponse) {
 	}
 	// safe Body.Close()
 	defer func() {
-		closeErr := data.R.Body.Close()
-		if response.ErrCode != 0 {
-			if closeErr != nil {
-				data.Logger.Error(fmt.Sprintf("%s: error closing body", data.HandlerName), zap.Error(closeErr))
-			}
-			return
+		if err := data.R.Body.Close(); err != nil {
+			data.Logger.Error(fmt.Sprintf("%s: error closing body", data.HandlerName), zap.Error(err))
 		}
-		response = ValidateResponse{
-			ErrMsg:  ErrorAsJSON(closeErr),
-			ErrCode: http.StatusInternalServerError,
-		}
-		return
-
 	}()
 
 	if !json.Valid(body) {
@@ -56,7 +46,7 @@ func ProcessBody(data *ValidateData) (response ValidateResponse) {
 		}
 	}
 
-	err = json.Unmarshal(body, &data.RequestData)
+	err = json.Unmarshal(body, data.RequestData)
 	if err != nil {
 		return ValidateResponse{
 			ErrMsg:  ErrorAsJSON(err),

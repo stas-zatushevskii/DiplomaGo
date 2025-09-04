@@ -46,11 +46,13 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 		processBodyResponse := utils.ProcessBody(&utils.ValidateData{
 			R:           r,
 			Logger:      h.logger,
+			Validator:   h.validator,
 			HandlerName: HandlerName,
-			RequestData: requestData,
+			RequestData: &requestData,
 		})
 		if processBodyResponse.ErrCode != 0 {
 			http.Error(w, processBodyResponse.ErrMsg, processBodyResponse.ErrCode)
+			return
 		}
 
 		err := h.service.OrderService.AddExternalOrder(requestData.Order, userID) // adding new order in database with status Processed
