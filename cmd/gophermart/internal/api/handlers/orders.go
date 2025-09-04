@@ -27,7 +27,7 @@ func (h *Handler) OrderCreate() http.HandlerFunc {
 				return
 			}
 		}
-		w.WriteHeader(http.StatusCreated)
+		w.WriteHeader(http.StatusOK)
 	}
 }
 
