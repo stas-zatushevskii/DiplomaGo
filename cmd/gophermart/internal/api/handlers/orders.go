@@ -12,7 +12,7 @@ func (h *Handler) OrderCreate() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const HandlerName = "OrderCreate"
 		userID := r.Context().Value(constants.UserIDKey).(uint)
-		responseStatus := http.StatusCreated
+		responseStatus := http.StatusAccepted
 
 		orderNumber, err := utils.GetTextPlain(r, h.logger, HandlerName)
 		if err != nil {
