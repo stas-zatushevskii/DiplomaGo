@@ -58,6 +58,7 @@ func ProcessServiceError(err error, Logger *zap.Logger, HandlerName string) Proc
 		}
 	default:
 		Logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
+		Logger.Warn(HandlerName, zap.Error(err))
 		return ProcessErrorResponse{
 			ErrMsg:     ErrorAsJSON(err),
 			HttpStatus: http.StatusInternalServerError,

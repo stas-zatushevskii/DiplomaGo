@@ -48,6 +48,7 @@ func (h *Handler) OrdersGet() http.HandlerFunc {
 		if err != nil {
 			h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
 			http.Error(w, utils.ErrorAsJSON(err), http.StatusInternalServerError)
+			return
 		}
 		w.WriteHeader(http.StatusOK)
 		w.Write(response)
