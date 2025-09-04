@@ -51,15 +51,16 @@ func (h *Handler) Login() http.HandlerFunc {
 		var requestData UserRequest
 		const HandlerName = "Login"
 
-		validateResponse := utils.ProcessBody(&utils.ValidateData{
+		processBodyResponse := utils.ProcessBody(&utils.ValidateData{
 			R:           r,
 			Logger:      h.logger,
+			Validator:   h.validator,
 			HandlerName: HandlerName,
-			RequestData: requestData,
+			RequestData: &requestData,
 		})
-
-		if validateResponse.ErrCode != 0 {
-			http.Error(w, validateResponse.ErrMsg, validateResponse.ErrCode)
+		if processBodyResponse.ErrCode != 0 {
+			http.Error(w, processBodyResponse.ErrMsg, processBodyResponse.ErrCode)
+			return
 		}
 
 		loginResponse := h.processUserLogin(requestData.Username, requestData.Password, HandlerName)
