@@ -10,7 +10,7 @@ import (
 
 type ProcessErrorResponse struct {
 	ErrMsg     string
-	HttpStatus int
+	HTTPStatus int
 }
 
 // ProcessServiceError return httpStatus (200, 400 ...) and errMsg according to custom error type.
@@ -19,49 +19,49 @@ func ProcessServiceError(err error, Logger *zap.Logger, HandlerName string) Proc
 	case errors.Is(err, customErrors.ErrUserNotFoundByUsername):
 		return ProcessErrorResponse{
 			ErrMsg:     ErrorAsJSON(err),
-			HttpStatus: http.StatusNotFound,
+			HTTPStatus: http.StatusNotFound,
 		}
 	case errors.Is(err, customErrors.ErrUserNotFound):
 		return ProcessErrorResponse{
 			ErrMsg:     ErrorAsJSON(err),
-			HttpStatus: http.StatusUnauthorized,
+			HTTPStatus: http.StatusUnauthorized,
 		}
 	case errors.Is(err, customErrors.ErrOrderAlreadyExist):
 		return ProcessErrorResponse{
 			ErrMsg:     ErrorAsJSON(err),
-			HttpStatus: http.StatusConflict,
+			HTTPStatus: http.StatusConflict,
 		}
 	case errors.Is(err, customErrors.ErrOrderAlreadyUsed):
 		return ProcessErrorResponse{
 			ErrMsg:     "",
-			HttpStatus: http.StatusOK,
+			HTTPStatus: http.StatusOK,
 		}
 	case errors.Is(err, customErrors.ErrOrderInvalid):
 		return ProcessErrorResponse{
 			ErrMsg:     ErrorAsJSON(err),
-			HttpStatus: http.StatusUnprocessableEntity,
+			HTTPStatus: http.StatusUnprocessableEntity,
 		}
 	case errors.Is(err, customErrors.ErrOrdersNotFound):
 		return ProcessErrorResponse{
 			ErrMsg:     ErrorAsJSON(err),
-			HttpStatus: http.StatusUnprocessableEntity,
+			HTTPStatus: http.StatusUnprocessableEntity,
 		}
 	case errors.Is(err, customErrors.ErrNotEnoughBalance):
 		return ProcessErrorResponse{
 			ErrMsg:     ErrorAsJSON(err),
-			HttpStatus: http.StatusPaymentRequired,
+			HTTPStatus: http.StatusPaymentRequired,
 		}
 	case errors.Is(err, customErrors.ErrNoWithdrawals):
 		return ProcessErrorResponse{
 			ErrMsg:     ErrorAsJSON(err),
-			HttpStatus: http.StatusNoContent,
+			HTTPStatus: http.StatusNoContent,
 		}
 	default:
 		Logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
 		Logger.Warn(HandlerName, zap.Error(err))
 		return ProcessErrorResponse{
 			ErrMsg:     ErrorAsJSON(err),
-			HttpStatus: http.StatusInternalServerError,
+			HTTPStatus: http.StatusInternalServerError,
 		}
 	}
 }

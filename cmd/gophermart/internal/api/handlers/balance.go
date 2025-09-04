@@ -15,12 +15,11 @@ func (h *Handler) GetUserBalance() http.HandlerFunc {
 		userID := r.Context().Value(constants.UserIDKey).(uint)
 		user, err := h.service.UserService.GetUserBalance(userID)
 		if err != nil {
-			if err != nil {
-				resp := utils.ProcessServiceError(err, h.logger, HandlerName)
-				if resp.HttpStatus != http.StatusOK {
-					http.Error(w, resp.ErrMsg, resp.HttpStatus)
-					return
-				}
+			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
+				return
+
 			}
 		}
 		response, err := json.Marshal(user)
@@ -57,22 +56,20 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 
 		err := h.service.OrderService.AddExternalOrder(requestData.Order, userID) // adding new order in database with status Processed
 		if err != nil {
-			if err != nil {
-				resp := utils.ProcessServiceError(err, h.logger, HandlerName)
-				if resp.HttpStatus != http.StatusOK {
-					http.Error(w, resp.ErrMsg, resp.HttpStatus)
-					return
-				}
+			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
+				return
+
 			}
 		}
 		userBalance, err := h.service.UserService.GetUserBalance(userID)
 		if err != nil {
-			if err != nil {
-				resp := utils.ProcessServiceError(err, h.logger, HandlerName)
-				if resp.HttpStatus != http.StatusOK {
-					http.Error(w, resp.ErrMsg, resp.HttpStatus)
-					return
-				}
+			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
+				return
+
 			}
 		}
 		err = h.service.OrderService.Withdraw(
@@ -80,12 +77,11 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 			requestData.Withdrawn,
 			userBalance.Accrual)
 		if err != nil {
-			if err != nil {
-				resp := utils.ProcessServiceError(err, h.logger, HandlerName)
-				if resp.HttpStatus != http.StatusOK {
-					http.Error(w, resp.ErrMsg, resp.HttpStatus)
-					return
-				}
+			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
+				return
+
 			}
 		}
 		w.WriteHeader(http.StatusOK)
@@ -98,22 +94,20 @@ func (h *Handler) GetWithdrawalsHistory() http.HandlerFunc {
 		userID := r.Context().Value(constants.UserIDKey).(uint)
 		history, err := h.service.OrderService.GetWithdrawByUserID(userID)
 		if err != nil {
-			if err != nil {
-				resp := utils.ProcessServiceError(err, h.logger, HandlerName)
-				if resp.HttpStatus != http.StatusOK {
-					http.Error(w, resp.ErrMsg, resp.HttpStatus)
-					return
-				}
+			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
+				return
+
 			}
 		}
 		response, err := json.Marshal(history)
 		if err != nil {
-			if err != nil {
-				resp := utils.ProcessServiceError(err, h.logger, HandlerName)
-				if resp.HttpStatus != http.StatusOK {
-					http.Error(w, resp.ErrMsg, resp.HttpStatus)
-					return
-				}
+			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
+				return
+
 			}
 		}
 		w.WriteHeader(http.StatusOK)

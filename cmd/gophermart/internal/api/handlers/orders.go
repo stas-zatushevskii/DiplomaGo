@@ -12,6 +12,7 @@ func (h *Handler) OrderCreate() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const HandlerName = "OrderCreate"
 		userID := r.Context().Value(constants.UserIDKey).(uint)
+		responseStatus := http.StatusCreated
 
 		orderNumber, err := utils.GetTextPlain(r, h.logger, HandlerName)
 		if err != nil {
@@ -22,12 +23,13 @@ func (h *Handler) OrderCreate() http.HandlerFunc {
 		err = h.service.OrderService.AddNewOrder(orderNumber, userID, h.orderChan)
 		if err != nil {
 			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
-			if resp.HttpStatus != http.StatusOK {
-				http.Error(w, resp.ErrMsg, resp.HttpStatus)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
 				return
 			}
+			responseStatus = resp.HTTPStatus
 		}
-		w.WriteHeader(http.StatusOK)
+		w.WriteHeader(responseStatus)
 	}
 }
 
@@ -39,8 +41,8 @@ func (h *Handler) OrdersGet() http.HandlerFunc {
 		orders, err := h.service.OrderService.GetAllOrders(userID)
 		if err != nil {
 			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
-			if resp.HttpStatus != http.StatusOK {
-				http.Error(w, resp.ErrMsg, resp.HttpStatus)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
 				return
 			}
 		}

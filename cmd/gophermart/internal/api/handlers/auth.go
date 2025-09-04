@@ -30,14 +30,14 @@ func (h *Handler) Register() http.HandlerFunc {
 		user, err := h.service.UserService.CreateNew(requestData.Username, requestData.Password)
 		if err != nil {
 			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
-			if resp.HttpStatus != http.StatusOK {
-				http.Error(w, resp.ErrMsg, resp.HttpStatus)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
 				return
 			}
 		}
 		loginResponse := h.processUserLogin(user.Username, requestData.Password, HandlerName)
-		if loginResponse.HttpStatus != http.StatusOK {
-			http.Error(w, loginResponse.ErrMsg, loginResponse.HttpStatus)
+		if loginResponse.HTTPStatus != http.StatusOK {
+			http.Error(w, loginResponse.ErrMsg, loginResponse.HTTPStatus)
 			return
 		}
 
@@ -64,8 +64,8 @@ func (h *Handler) Login() http.HandlerFunc {
 		}
 
 		loginResponse := h.processUserLogin(requestData.Username, requestData.Password, HandlerName)
-		if loginResponse.HttpStatus != http.StatusOK {
-			http.Error(w, loginResponse.ErrMsg, loginResponse.HttpStatus)
+		if loginResponse.HTTPStatus != http.StatusOK {
+			http.Error(w, loginResponse.ErrMsg, loginResponse.HTTPStatus)
 			return
 		}
 
@@ -80,7 +80,7 @@ type processUserLoginResponse struct {
 }
 
 // processUserLogin processing user login: Authenticate user, building jwt and creating cookie object.
-// If all good -> HttpStatus = http.StatusOK, cookie = http.Cookie(...)
+// If all good -> HTTPStatus = http.StatusOK, cookie = http.Cookie(...)
 func (h *Handler) processUserLogin(Username, Password, HandlerName string) processUserLoginResponse {
 	login, err := h.service.UserService.Login(Username, Password)
 	if err != nil {
@@ -91,7 +91,7 @@ func (h *Handler) processUserLogin(Username, Password, HandlerName string) proce
 	}
 	if !login.Authenticated {
 		return processUserLoginResponse{
-			ProcessErrorResponse: utils.ProcessErrorResponse{HttpStatus: http.StatusUnauthorized, ErrMsg: "unauthorized"},
+			ProcessErrorResponse: utils.ProcessErrorResponse{HTTPStatus: http.StatusUnauthorized, ErrMsg: "unauthorized"},
 			Cookie:               nil,
 		}
 	}
@@ -108,7 +108,7 @@ func (h *Handler) processUserLogin(Username, Password, HandlerName string) proce
 		Value:   jwt,
 	}
 	return processUserLoginResponse{
-		ProcessErrorResponse: utils.ProcessErrorResponse{HttpStatus: http.StatusOK, ErrMsg: ""},
+		ProcessErrorResponse: utils.ProcessErrorResponse{HTTPStatus: http.StatusOK, ErrMsg: ""},
 		Cookie:               cookie,
 	}
 }
