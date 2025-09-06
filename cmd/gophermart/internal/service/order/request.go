@@ -14,7 +14,10 @@ func (o *ServiceOrder) SendRequest(orderNumber string) (*models.AccrualResponse,
 	var response models.AccrualResponse
 	URL := fmt.Sprintf("%s/api/orders/%s", o.config.Accrual.Address, orderNumber)
 	o.logger.Warn(URL)
-	req, _ := http.NewRequest(http.MethodGet, URL, nil)
+	req, err := http.NewRequest(http.MethodGet, URL, nil)
+	if err != nil {
+		return nil, err
+	}
 	client := &http.Client{
 		Timeout: time.Second * 4,
 	}

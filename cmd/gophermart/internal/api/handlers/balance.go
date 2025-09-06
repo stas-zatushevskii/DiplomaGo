@@ -2,27 +2,25 @@ package handlers
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/api/utils"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/constants"
-	CustomErrors "github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/errors"
 	"github.com/stas-zatushevskii/DiplomaGo/cmd/gophermart/internal/models"
-	"io"
 	"net/http"
 )
 
 func (h *Handler) GetUserBalance() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const HandlerName = "GetUserBalance"
-		userID, ok := r.Context().Value(constants.UserIDKey).(uint)
-		if !ok {
-			http.Error(w, utils.ErrorAsJSON(CustomErrors.ErrUserNotFound), http.StatusUnauthorized)
-		}
+		userID := r.Context().Value(constants.UserIDKey).(uint)
 		user, err := h.service.UserService.GetUserBalance(userID)
 		if err != nil {
-			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
-			return
+			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
+				return
+
+			}
 		}
 		response, err := json.Marshal(user)
 		if err != nil {
@@ -43,77 +41,47 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const HandlerName = "WithdrawOrderAccrual"
 		var requestData withdrawBalanceData
-		userID, ok := r.Context().Value(constants.UserIDKey).(uint)
-		if !ok {
-			http.Error(w, utils.ErrorAsJSON(CustomErrors.ErrUserNotFound), http.StatusUnauthorized)
-		}
-		body, err := io.ReadAll(r.Body)
-
-		if err != nil {
-			h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
-			http.Error(w, utils.ErrorAsJSON(err), http.StatusInternalServerError)
-			return
-		}
-		r.Body.Close()
-
-		if !json.Valid(body) {
-			http.Error(w, "Invalid json", http.StatusBadRequest)
+		userID := r.Context().Value(constants.UserIDKey).(uint)
+		processBodyResponse := utils.ProcessBody(&utils.ValidateData{
+			R:           r,
+			Logger:      h.logger,
+			Validator:   h.validator,
+			HandlerName: HandlerName,
+			RequestData: &requestData,
+		})
+		if processBodyResponse.ErrCode != 0 {
+			http.Error(w, processBodyResponse.ErrMsg, processBodyResponse.ErrCode)
 			return
 		}
 
-		err = json.Unmarshal(body, &requestData)
+		err := h.service.OrderService.AddExternalOrder(requestData.Order, userID) // adding new order in database with status Processed
 		if err != nil {
-			h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
-			http.Error(w, utils.ErrorAsJSON(err), http.StatusBadRequest)
-			return
-		}
+			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
+				return
 
-		// Validate by tags
-		err = h.validator.Struct(requestData)
-		if err != nil {
-			http.Error(w, utils.ErrorAsJSON(err), http.StatusBadRequest)
-			return
-		}
-
-		err = h.service.OrderService.AddExternalOrder(requestData.Order, userID) // adding new order in database with status Processed
-		if err != nil {
-			switch {
-			case errors.Is(err, CustomErrors.ErrOrderAlreadyExist):
-				http.Error(w, utils.ErrorAsJSON(err), http.StatusConflict)
-				return
-			case errors.Is(err, CustomErrors.ErrOrderAlreadyUsed):
-				w.WriteHeader(http.StatusOK)
-				return
-			case errors.Is(err, CustomErrors.ErrOrderInvalid):
-				http.Error(w, utils.ErrorAsJSON(err), http.StatusUnprocessableEntity)
-				return
-			default:
-				h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
-				http.Error(w, utils.ErrorAsJSON(err), http.StatusInternalServerError)
-				return
 			}
 		}
 		userBalance, err := h.service.UserService.GetUserBalance(userID)
 		if err != nil {
-			h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
-			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
+				return
+
+			}
 		}
 		err = h.service.OrderService.Withdraw(
 			models.ProcessOderData{UserID: userID, OrderNumber: requestData.Order},
 			requestData.Withdrawn,
 			userBalance.Accrual)
 		if err != nil {
-			switch {
-			case errors.Is(err, CustomErrors.ErrOrdersNotFound):
-				http.Error(w, utils.ErrorAsJSON(err), http.StatusUnprocessableEntity)
+			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
 				return
-			case errors.Is(err, CustomErrors.ErrNotEnoughBalance):
-				http.Error(w, utils.ErrorAsJSON(err), http.StatusPaymentRequired)
-				return
-			default:
-				h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
-				http.Error(w, utils.ErrorAsJSON(err), http.StatusInternalServerError)
-				return
+
 			}
 		}
 		w.WriteHeader(http.StatusOK)
@@ -123,25 +91,24 @@ func (h *Handler) WithdrawOrderAccrual() http.HandlerFunc {
 func (h *Handler) GetWithdrawalsHistory() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		const HandlerName = "GetWithdrawalsHistory"
-		userID, ok := r.Context().Value(constants.UserIDKey).(uint)
-		if !ok {
-			http.Error(w, utils.ErrorAsJSON(CustomErrors.ErrUserNotFound), http.StatusUnauthorized)
-		}
+		userID := r.Context().Value(constants.UserIDKey).(uint)
 		history, err := h.service.OrderService.GetWithdrawByUserID(userID)
 		if err != nil {
-			switch {
-			case errors.Is(err, CustomErrors.ErrNoWithdrawals):
-				http.Error(w, utils.ErrorAsJSON(err), http.StatusNoContent)
+			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
 				return
-			default:
-				http.Error(w, utils.ErrorAsJSON(err), http.StatusInternalServerError)
-				return
+
 			}
 		}
 		response, err := json.Marshal(history)
 		if err != nil {
-			h.logger.Error(fmt.Sprintf("%s: %s", HandlerName, err.Error()))
-			http.Error(w, utils.ErrorAsJSON(err), http.StatusInternalServerError)
+			resp := utils.ProcessServiceError(err, h.logger, HandlerName)
+			if resp.HTTPStatus != http.StatusOK {
+				http.Error(w, resp.ErrMsg, resp.HTTPStatus)
+				return
+
+			}
 		}
 		w.WriteHeader(http.StatusOK)
 		w.Write(response)
